@@ -18,6 +18,7 @@ $ npm install @material-ui/icons
 ## Resources
 
 * <a href="https://medium.com/codingthesmartway-com-blog/getting-started-with-material-ui-for-react-material-design-for-react-364b2688b555" target="_blank">Getting Started With Material-UI For React (Material Design For React)</a>
+* <a href="https://material-ui.com/components/material-icons/" target="_blank">Material Icons</a>
 
 
 ## Author
