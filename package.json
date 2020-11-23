@@ -44,5 +44,10 @@
     "buildDir": "./build",
     "cacheDir": "./cache",
     "macIcns": "./src/logo.icns"
-  }
+  },
+  "description": "This project was bootstrapped with [Create NW.js React App](https://github.com/naviapps/create-nw-react-app).",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
