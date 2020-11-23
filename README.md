@@ -1,7 +1,7 @@
 # Fog Controller
 *NW.js React app to control Fog Machine prop.*
 
-
+> Early draft development stage.
 
 ## Resources
 
