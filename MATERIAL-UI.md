@@ -9,6 +9,12 @@ $ npm install contentful
 ```
 
 
+## More modules
+ 
+```bash
+$ npm install @material-ui/icons
+```
+
 ## Resources
 
 * <a href="https://medium.com/codingthesmartway-com-blog/getting-started-with-material-ui-for-react-material-design-for-react-364b2688b555" target="_blank">Getting Started With Material-UI For React (Material Design For React)</a>
