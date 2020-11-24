@@ -25,26 +25,33 @@ class PropButton extends Component {
     }
 }
 
-function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <p>
-                    Fog Machine Control
-                </p>
-            </header>
-            <div className="App-panel">
-                <PropButton onClick={() => alert("clicked!")}>
-                    POWER ON
-                </PropButton>
+class App extends Component {
+
+    render() {
+        return (
+            <div className="App">
+                <header className="App-header">
+                    <p>
+                        Fog Machine Control
+                    </p>
+                </header>
+                <div className="App-panel">
+                    <PropButton onClick={() => alert("clicked!")}>
+                        POWER ON
+                    </PropButton>
+                </div>
+                <div className="App-footer">
+                    <Fab color="secondary" aria-label="tune" onClick={() => alert("Fog tuning and prop settings!")}>
+                        <TuneIcon/>
+                    </Fab>
+                </div>
             </div>
-            <div className="App-footer">
-                <Fab color="secondary" aria-label="tune" onClick={() => alert("Fog tuning and prop settings!")}>
-                    <TuneIcon />
-                </Fab>
-            </div>
-        </div>
-    );
+        );
+    }
+
+    componentDidMount() {
+        alert("starting...");
+    }
 }
 
 export default App;
