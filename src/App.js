@@ -4,6 +4,8 @@ import Fab from '@material-ui/core/Fab'
 import TuneIcon from '@material-ui/icons/Tune';
 import './App.css';
 
+const fs = require('fs-extra')
+
 class PropButton extends Component {
     render() {
         const {
@@ -50,7 +52,12 @@ class App extends Component {
     }
 
     componentDidMount() {
-        alert("starting...");
+        if (fs.existsSync('settings.json')) {
+            let content = fs.readFileSync('settings.json', "utf8");
+            alert(content);
+        } else {
+            alert("no settings...");
+        }
     }
 }
 
