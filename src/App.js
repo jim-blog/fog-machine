@@ -49,8 +49,15 @@ class App extends Component {
 
     componentDidMount() {
         if (fs.existsSync('settings.json')) {
-            let content = fs.readFileSync('settings.json', "utf8");
-            alert(content);
+            //let content = fs.readFileSync('settings.json', "utf8");
+            //alert(content);
+            fs.readJson('settings.json', { throws: false })
+                .then(obj => {
+                    console.log(obj)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
         } else {
             alert("no settings...");
         }
