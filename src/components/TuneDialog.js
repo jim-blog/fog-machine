@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -12,6 +12,8 @@ import TuneIcon from "@material-ui/icons/Tune";
 function TuneDialog() {
     const [open, setOpen] = React.useState(false);
 
+    const ArduinoIpAddressRef = useRef();
+
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -21,7 +23,8 @@ function TuneDialog() {
     };
 
     const handleSave = () => {
-        alert("Save settings to be done...");
+        //alert("Save settings to be done...");
+        alert(ArduinoIpAddressRef.current.value)
         setOpen(false);
     };
 
@@ -37,8 +40,9 @@ function TuneDialog() {
                         To subscribe to this website, please enter your email address here. We will send updates
                         occasionally.
                     </DialogContentText>
-                    <TextField autoFocus margin="dense" id="name" label="Arduino Prop IP Address" type="text"
-                               pattern="^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$" fullWidth/>
+                    <TextField autoFocus margin="dense" id="ArduinoIpAddress" label="Arduino Prop IP Address" type="text"
+                               pattern={["^.{7,15}$", "(?=.*\\d)", "(?=.*\\.)"]} fullWidth inputRef={ArduinoIpAddressRef}
+                    />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
