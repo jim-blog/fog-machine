@@ -15,7 +15,8 @@
     "fs-extra": "^9.0.1",
     "nw-react-scripts": "3.4.1",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-material-ui-form-validator": "^2.1.1"
   },
   "scripts": {
     "start": "nw-react-scripts start",
