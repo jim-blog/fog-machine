@@ -41,7 +41,8 @@ class App extends Component {
                     </PropButton>
                 </div>
                 <div className="App-footer">
-                    <TuneDialog/>
+                    <TuneDialog
+                    />
                 </div>
             </div>
         );
@@ -51,7 +52,7 @@ class App extends Component {
         if (fs.existsSync('settings.json')) {
             //let content = fs.readFileSync('settings.json', "utf8");
             //alert(content);
-            fs.readJson('settings.json', { throws: false })
+            fs.readJson('settings.json', {throws: false})
                 .then(obj => {
                     console.log(obj)
                 })
