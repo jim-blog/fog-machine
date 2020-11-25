@@ -9,6 +9,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Fab from "@material-ui/core/Fab";
 import TuneIcon from "@material-ui/icons/Tune";
 
+import InputSlider from 'components/InputSlider';
+
 function TuneDialog() {
     const [open, setOpen] = React.useState(false);
 
@@ -37,11 +39,12 @@ function TuneDialog() {
                 <DialogTitle id="form-dialog-title">Fog Machine Settings</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We will send updates
-                        occasionally.
+                        Enter the IP address of the Arduino board and tune the fog diffusion.
                     </DialogContentText>
-                    <TextField autoFocus margin="dense" id="ArduinoIpAddress" label="Arduino Prop IP Address" type="text"
-                               pattern={["^.{7,15}$", "(?=.*\\d)", "(?=.*\\.)"]} fullWidth inputRef={ArduinoIpAddressRef}
+                    <TextField autoFocus margin="dense" id="ArduinoIpAddress" label="Arduino Prop IP Address"
+                                   type="text" inputRef={ArduinoIpAddressRef}
+                    />
+                    <InputSlider
                     />
                 </DialogContent>
                 <DialogActions>
