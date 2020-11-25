@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import Button from '@material-ui/core/Button'
-import Fab from '@material-ui/core/Fab'
-import TuneIcon from '@material-ui/icons/Tune';
-import './App.css';
+import TuneDialog from 'components/TuneDialog';
+import 'App.css';
 
 const fs = require('fs-extra')
 
@@ -28,7 +27,6 @@ class PropButton extends Component {
 }
 
 class App extends Component {
-
     render() {
         return (
             <div className="App">
@@ -43,9 +41,7 @@ class App extends Component {
                     </PropButton>
                 </div>
                 <div className="App-footer">
-                    <Fab color="secondary" aria-label="tune" onClick={() => alert("Fog tuning and prop settings!")}>
-                        <TuneIcon/>
-                    </Fab>
+                    <TuneDialog/>
                 </div>
             </div>
         );
