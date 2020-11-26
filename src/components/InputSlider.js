@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
 function InputSlider(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(props.value);
-    const UserInputRef = useRef();
+    const UserInputRef = props.inputRef;
 
     const handleSliderChange = (event, newValue) => {
         setValue(newValue);
