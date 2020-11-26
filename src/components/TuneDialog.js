@@ -43,7 +43,7 @@ function TuneDialog() {
                     <DialogContentText>
                         Spit every T1 seconds, N times for T2 seconds, pausing T3 seconds.
                     </DialogContentText>
-                    <InputSlider title={"T1 (seconds)"} step={60} min={10} max={3600}
+                    <InputSlider title={"T1 (minutes)"} step={1} min={1} max={60}
                     />
                     <InputSlider title={"N (times)"} step={1} min={1} max={10}
                     />
