@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
-import Timer from '@material-ui/icons/Timer';
 
 const useStyles = makeStyles({
     root: {
@@ -41,9 +40,6 @@ function InputSlider(props) {
                 {props.title}
             </Typography>
             <Grid container spacing={2} alignItems="center">
-                <Grid item>
-                    <Timer />
-                </Grid>
                 <Grid item xs>
                     <Slider
                         value={typeof value === 'number' ? value : 0}
@@ -63,7 +59,7 @@ function InputSlider(props) {
                         onBlur={handleBlur}
                         type="number"
                         inputProps={{
-                            step: props.step,
+                            step: 1,
                             min: props.min,
                             max: props.max,
                             type: 'number',
