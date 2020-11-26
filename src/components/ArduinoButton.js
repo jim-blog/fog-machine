@@ -1,11 +1,9 @@
 import React, {Component} from "react";
 import Button from "@material-ui/core/Button";
-import TuneDialog from "./TuneDialog";
 
 class ArduinoButton extends Component {
     render() {
         const {
-            state,
             onClick,
             className = "",
             children,
