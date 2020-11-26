@@ -8,6 +8,7 @@ const fs = require('fs-extra')
 class App extends Component {
     state = {
         settings: {
+            name: 'Fog Machine',
             arduinoIpAddress: '192.168.1.201',
             T1: 10,
             N: 2,
@@ -19,10 +20,8 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <header className="App-header">
-                    <p>
-                        Fog Machine Control
-                    </p>
+                <header className="App-header" state={this.state}>
+                    {this.state.settings.name}
                 </header>
                 <div className="App-panel">
                     <ArduinoButton state={this.state} onClick={() => alert(this.state.settings.arduinoIpAddress)}>
