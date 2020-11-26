@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "window": {
-    "icon": "icon.png"
+    "icon": "icon.png",
+    "min-width": 360,
+    "min-height": 440,
+    "width": 520,
+    "height": 640
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",

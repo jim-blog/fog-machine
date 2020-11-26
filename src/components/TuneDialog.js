@@ -6,7 +6,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
-import Fab from "@material-ui/core/Fab";
 import TuneIcon from "@material-ui/icons/Tune";
 import InputSlider from 'components/InputSlider';
 
@@ -24,6 +23,8 @@ function TuneDialog(props) {
     } = props;
 
     const handleClickOpen = () => {
+        const win = nw.Window.get();
+        win.resizeTo(520, 640);
         setOpen(true);
     };
 
@@ -43,9 +44,9 @@ function TuneDialog(props) {
 
     return (
         <div className="TuneDialog">
-            <Fab color="secondary" aria-label="tune" onClick={handleClickOpen}>
-                <TuneIcon/>
-            </Fab>
+            <Button startIcon={<TuneIcon />} color="secondary" aria-label="tune" onClick={handleClickOpen}>
+                Settings
+            </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Settings</DialogTitle>
                 <DialogContent>
@@ -61,9 +62,6 @@ function TuneDialog(props) {
                                    defaultValue={state.settings.arduinoIpAddress}
                         />
                     </div>
-                    <DialogContentText>
-                        Spit every T1 seconds, N times for T2 seconds, pausing T3 seconds.
-                    </DialogContentText>
                     <InputSlider title={"T1 (minutes)"} step={1} min={1} max={60} value={state.settings.T1}
                                  inputRef={T1Ref}
                     />
@@ -76,6 +74,9 @@ function TuneDialog(props) {
                     <InputSlider title={"T3 (seconds)"} step={1} min={1} max={60} value={state.settings.T3}
                                  inputRef={T3Ref}
                     />
+                    <DialogContentText>
+                        Spit every T1 seconds, N times for T2 seconds, pausing T3 seconds.
+                    </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
