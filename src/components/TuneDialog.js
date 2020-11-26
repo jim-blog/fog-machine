@@ -19,8 +19,7 @@ function TuneDialog(props) {
     const T3Ref = useRef();
 
     const {
-        state,
-        children,
+        state
     } = props;
 
     const handleClickOpen = () => {
