@@ -11,13 +11,13 @@ const useStyles = makeStyles({
         width: 400,
     },
     input: {
-        width: 42,
+        width: 52,
     },
 });
 
-function InputSlider() {
+function InputSlider(props) {
     const classes = useStyles();
-    const [value, setValue] = React.useState(30);
+    const [value, setValue] = React.useState(10);
 
     const handleSliderChange = (event, newValue) => {
         setValue(newValue);
@@ -28,17 +28,17 @@ function InputSlider() {
     };
 
     const handleBlur = () => {
-        if (value < 0) {
-            setValue(0);
-        } else if (value > 100) {
-            setValue(100);
+        if (value < props.min) {
+            setValue(props.min);
+        } else if (value > props.max) {
+            setValue(props.max);
         }
     };
 
     return (
         <div className={classes.root}>
             <Typography id="input-slider" gutterBottom>
-                Spit every (seconds)
+                {props.title}
             </Typography>
             <Grid container spacing={2} alignItems="center">
                 <Grid item>
@@ -49,6 +49,9 @@ function InputSlider() {
                         value={typeof value === 'number' ? value : 0}
                         onChange={handleSliderChange}
                         aria-labelledby="input-slider"
+                        step={props.step}
+                        min={props.min}
+                        max={props.max}
                     />
                 </Grid>
                 <Grid item>
@@ -58,10 +61,11 @@ function InputSlider() {
                         margin="dense"
                         onChange={handleInputChange}
                         onBlur={handleBlur}
+                        type="number"
                         inputProps={{
-                            step: 10,
-                            min: 0,
-                            max: 100,
+                            step: props.step,
+                            min: props.min,
+                            max: props.max,
                             type: 'number',
                             'aria-labelledby': 'input-slider',
                         }}

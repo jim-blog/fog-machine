@@ -41,7 +41,7 @@ class App extends Component {
                     </PropButton>
                 </div>
                 <div className="App-footer">
-                    <TuneDialog
+                    <TuneDialog title={""}
                     />
                 </div>
             </div>

@@ -13,7 +13,6 @@ import InputSlider from 'components/InputSlider';
 
 function TuneDialog() {
     const [open, setOpen] = React.useState(false);
-
     const ArduinoIpAddressRef = useRef();
 
     const handleClickOpen = () => {
@@ -31,20 +30,26 @@ function TuneDialog() {
     };
 
     return (
-        <div>
+        <div className="TuneDialog">
             <Fab color="secondary" aria-label="tune" onClick={handleClickOpen}>
                 <TuneIcon/>
             </Fab>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Fog Machine Settings</DialogTitle>
+                <DialogTitle id="form-dialog-title">Settings</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        Enter the IP address of the Arduino board and tune the fog diffusion.
-                    </DialogContentText>
                     <TextField autoFocus margin="dense" id="ArduinoIpAddress" label="Arduino Prop IP Address"
                                    type="text" inputRef={ArduinoIpAddressRef}
                     />
-                    <InputSlider
+                    <DialogContentText>
+                        Spit every T1 seconds, N times for T2 seconds, pausing T3 seconds.
+                    </DialogContentText>
+                    <InputSlider title={"T1 (seconds)"} step={60} min={10} max={3600}
+                    />
+                    <InputSlider title={"N (times)"} step={1} min={1} max={10}
+                    />
+                    <InputSlider title={"T2 (seconds)"} step={1} min={1} max={60}
+                    />
+                    <InputSlider title={"T3 (seconds)"} step={1} min={1} max={60}
                     />
                 </DialogContent>
                 <DialogActions>

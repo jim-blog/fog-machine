@@ -36,3 +36,13 @@
   font-size: calc(10px + 2vmin);
   margin: 20px;
 }
+
+.MuiDialogTitle-root {
+  line-height: 1.1em;
+  background-color: darkmagenta;
+  color: white;
+}
+
+.MuiDialogContentText-root {
+  padding-top: 1.6em;
+}
