@@ -12,6 +12,7 @@ import InputSlider from 'components/InputSlider';
 
 function TuneDialog(props) {
     const [open, setOpen] = React.useState(false);
+    const NameRef = useRef();
     const ArduinoIpAddressRef = useRef();
     const T1Ref = useRef();
     const NRef = useRef();
@@ -30,11 +31,8 @@ function TuneDialog(props) {
         setOpen(false);
     };
 
-    const componentDidMount = () =>  {
-        alert("mounted");
-    }
-
     const handleSave = () => {
+        state.settings.name = NameRef.current.value;
         state.settings.arduinoIpAddress = ArduinoIpAddressRef.current.value;
         state.settings.T1 = parseInt(T1Ref.current.value)
         state.settings.N = parseInt(NRef.current.value)
@@ -51,10 +49,18 @@ function TuneDialog(props) {
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Settings</DialogTitle>
                 <DialogContent>
-                    <TextField autoFocus margin="dense" id="ArduinoIpAddress" label="Arduino Prop IP Address"
-                               type="text" inputRef={ArduinoIpAddressRef}
-                               defaultValue={state.settings.arduinoIpAddress}
-                    />
+                    <div>
+                        <TextField autoFocus margin="dense" id="Name" label="Name"
+                                   type="text" inputRef={NameRef}
+                                   defaultValue={state.settings.name}
+                        />
+                    </div>
+                    <div>
+                        <TextField autoFocus margin="dense" id="ArduinoIpAddress" label="Arduino Prop IP Address"
+                                   type="text" inputRef={ArduinoIpAddressRef}
+                                   defaultValue={state.settings.arduinoIpAddress}
+                        />
+                    </div>
                     <DialogContentText>
                         Spit every T1 seconds, N times for T2 seconds, pausing T3 seconds.
                     </DialogContentText>
