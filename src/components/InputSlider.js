@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -16,7 +16,8 @@ const useStyles = makeStyles({
 
 function InputSlider(props) {
     const classes = useStyles();
-    const [value, setValue] = React.useState(10);
+    const [value, setValue] = React.useState(props.value);
+    const UserInputRef = useRef();
 
     const handleSliderChange = (event, newValue) => {
         setValue(newValue);
@@ -58,6 +59,7 @@ function InputSlider(props) {
                         onChange={handleInputChange}
                         onBlur={handleBlur}
                         type="number"
+                        inputRef={UserInputRef}
                         inputProps={{
                             step: 1,
                             min: props.min,

@@ -8,12 +8,16 @@ import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import Fab from "@material-ui/core/Fab";
 import TuneIcon from "@material-ui/icons/Tune";
-
 import InputSlider from 'components/InputSlider';
 
-function TuneDialog() {
+function TuneDialog(props) {
     const [open, setOpen] = React.useState(false);
     const ArduinoIpAddressRef = useRef();
+
+    const {
+        state,
+        children,
+    } = props;
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -24,8 +28,8 @@ function TuneDialog() {
     };
 
     const handleSave = () => {
-        //alert("Save settings to be done...");
-        alert(ArduinoIpAddressRef.current.value)
+        state.settings.arduinoIpAddress = ArduinoIpAddressRef.current.value;
+        //state.settings.T1 =
         setOpen(false);
     };
 
@@ -38,18 +42,19 @@ function TuneDialog() {
                 <DialogTitle id="form-dialog-title">Settings</DialogTitle>
                 <DialogContent>
                     <TextField autoFocus margin="dense" id="ArduinoIpAddress" label="Arduino Prop IP Address"
-                                   type="text" inputRef={ArduinoIpAddressRef}
+                               type="text" inputRef={ArduinoIpAddressRef}
+                               defaultValue={state.settings.arduinoIpAddress}
                     />
                     <DialogContentText>
                         Spit every T1 seconds, N times for T2 seconds, pausing T3 seconds.
                     </DialogContentText>
-                    <InputSlider title={"T1 (minutes)"} step={1} min={1} max={60}
+                    <InputSlider title={"T1 (minutes)"} step={1} min={1} max={60} value={state.settings.T1}
                     />
-                    <InputSlider title={"N (times)"} step={1} min={1} max={10}
+                    <InputSlider title={"N (times)"} step={1} min={1} max={10} value={state.settings.N}
                     />
-                    <InputSlider title={"T2 (seconds)"} step={1} min={1} max={60}
+                    <InputSlider title={"T2 (seconds)"} step={1} min={1} max={60} value={state.settings.T2}
                     />
-                    <InputSlider title={"T3 (seconds)"} step={1} min={1} max={60}
+                    <InputSlider title={"T3 (seconds)"} step={1} min={1} max={60} value={state.settings.T3}
                     />
                 </DialogContent>
                 <DialogActions>

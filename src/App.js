@@ -1,32 +1,21 @@
 import React, {Component} from 'react';
-import Button from '@material-ui/core/Button'
+import ArduinoButton from 'components/ArduinoButton';
 import TuneDialog from 'components/TuneDialog';
 import 'App.css';
 
 const fs = require('fs-extra')
 
-class PropButton extends Component {
-    render() {
-        const {
-            onClick,
-            className = "",
-            children,
-        } = this.props;
-
-        return (
-            <Button
-                onClick={onClick}
-                className={className}
-                variant="contained"
-                color="primary"
-            >
-                {children}
-            </Button>
-        );
-    }
-}
-
 class App extends Component {
+    state = {
+        settings: {
+            arduinoIpAddress: '192.168.1.201',
+            T1: 10,
+            N: 2,
+            T2: 5,
+            T3: 5
+        }
+    };
+
     render() {
         return (
             <div className="App">
@@ -36,12 +25,12 @@ class App extends Component {
                     </p>
                 </header>
                 <div className="App-panel">
-                    <PropButton onClick={() => alert("clicked!")}>
+                    <ArduinoButton state={this.state} onClick={() => alert(this.state.settings.arduinoIpAddress)}>
                         POWER ON
-                    </PropButton>
+                    </ArduinoButton>
                 </div>
                 <div className="App-footer">
-                    <TuneDialog title={""}
+                    <TuneDialog title={""} state={this.state}
                     />
                 </div>
             </div>
