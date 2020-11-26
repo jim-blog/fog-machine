@@ -30,12 +30,16 @@ function TuneDialog(props) {
         setOpen(false);
     };
 
+    const componentDidMount = () =>  {
+        alert("mounted");
+    }
+
     const handleSave = () => {
         state.settings.arduinoIpAddress = ArduinoIpAddressRef.current.value;
-        state.settings.T1 = T1Ref.current.value
-        state.settings.N = NRef.current.value
-        state.settings.T2 = T2Ref.current.value
-        state.settings.T3 = T3Ref.current.value
+        state.settings.T1 = parseInt(T1Ref.current.value)
+        state.settings.N = parseInt(NRef.current.value)
+        state.settings.T2 = parseInt(T2Ref.current.value)
+        state.settings.T3 = parseInt(T3Ref.current.value)
         setOpen(false);
     };
 
