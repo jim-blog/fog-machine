@@ -13,10 +13,8 @@ class TuneDialog extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { settings: this.props.settings, open: false };
+        this.state = {settings: this.props.settings, open: false};
         this.setState(this.state);
-        this.handleBlur = this.handleBlur.bind(this);
-        this.handleChange = this.handleChange.bind(this);
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleSave = this.handleSave.bind(this);
@@ -28,32 +26,17 @@ class TuneDialog extends Component {
         this.T3Ref = this.props.settings.T3;
     }
 
-    handleBlur(e) {
-        console.log('handleChange')
-        console.log(e.target.value);
-    }
-
-    handleChange(e) {
-        console.log('handleChange')
-        console.log(e.target.value);
-    }
-
     handleClickOpen() {
-        console.log(JSON.stringify(this.state));
         const win = nw.Window.get();
         win.resizeTo(520, 660);
         this.setState({open: true});
     }
 
     handleClose() {
-        console.log('handleClose')
         this.setState({open: false});
     }
 
     handleSave() {
-        console.log('handleSave')
-        console.log(this.T1Ref)
-        console.log(this.NRef)
         const prevState = this.state;
         prevState.settings.name = this.NameRef;
         prevState.settings.arduinoIpAddress = this.ArduinoIpAddressRef;
@@ -69,7 +52,7 @@ class TuneDialog extends Component {
 
     render() {
         return (
-            <div className="TuneDialog" >
+            <div className="TuneDialog">
                 <Button startIcon={<TuneIcon/>} color="secondary" aria-label="tune" onClick={this.handleClickOpen}>
                     Settings
                 </Button>
@@ -80,33 +63,45 @@ class TuneDialog extends Component {
                             <TextField autoFocus margin="dense" id="Name" label="Name"
                                        type="text"
                                        defaultValue={this.NameRef}
-                                       onChange={(e) => {this.NameRef = e.target.value}}
+                                       onChange={(e) => {
+                                           this.NameRef = e.target.value
+                                       }}
                             />
                         </div>
                         <div>
                             <TextField autoFocus margin="dense" id="ArduinoIpAddress" label="Arduino Prop IP Address"
                                        type="text"
                                        defaultValue={this.ArduinoIpAddressRef}
-                                       onChange={(e) => {this.ArduinoIpAddressRef = e.target.value}}
+                                       onChange={(e) => {
+                                           this.ArduinoIpAddressRef = e.target.value
+                                       }}
                             />
                         </div>
                         <p></p>
                         <InputSlider title={"T1 (minutes)"} step={1} min={1} max={60}
                                      value={this.T1Ref}
-                                     onBlur={this.handleBlur}
-                                     onChange={(e) => {this.T1Ref = e.target.value}}
+                                     onChange={(e) => {
+                                         this.T1Ref = e.value
+                                     }}
                         />
                         <InputSlider title={"N (times)"} step={1} min={1} max={10}
                                      value={this.NRef}
-                                     onChange={(e) => {this.NRef = e.target.value}}
+                                     onChange={(e) => {
+                                         this.NRef = e.value
+                                     }}
                         />
                         <InputSlider title={"T2 (seconds)"} step={1} min={1} max={60}
                                      value={this.T2Ref}
-                                     onChange={(e) => {this.T2Ref = e.target.value}}
+                                     onChange={(e) => {
+                                         this.T2Ref = e.value
+                                     }}
                         />
                         <InputSlider title={"T3 (seconds)"} step={1} min={1} max={60}
                                      value={this.T3Ref}
-                                     onChange={(e) => {this.T3Ref = e.target.value}}
+                                     ref={this.T3Ref}
+                                     onChange={(e) => {
+                                         this.T3Ref = e.value
+                                     }}
                         />
                         <DialogContentText>
                             Spit every T1 seconds, N times for T2 seconds, pausing T3 seconds.

@@ -1,11 +1,11 @@
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import React, {Component} from 'react';
+import {withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import Input from '@material-ui/core/Input';
 
-const useStyles = makeStyles({
+const useStyles = theme => ({
     root: {
         width: 400,
     },
@@ -14,64 +14,73 @@ const useStyles = makeStyles({
     },
 });
 
-function InputSlider(props) {
-    const classes = useStyles();
-    const [value, setValue] = React.useState(props.value);
-    const UserInputRef = props.inputRef;
+class InputSlider extends Component {
 
-    const handleSliderChange = (event, newValue) => {
-        setValue(newValue);
+    constructor(props) {
+        super(props);
+        this.value = props.value;
+        this.state = {value: props.value};
+        this.setState(this.state);
+    }
+
+    handleSliderChange(event, newValue) {
+        this.value = newValue;
+        this.setState({value: newValue});
     };
 
-    const handleInputChange = (event) => {
-        setValue(event.target.value === '' ? '' : Number(event.target.value));
+    handleInputChange(event) {
+        this.value = event.target.value === '' ? '' : Number(event.target.value);
+        this.setState({value: event.target.value === '' ? '' : Number(event.target.value)});
     };
 
-    const handleBlur = () => {
-        if (value < props.min) {
-            setValue(props.min);
-        } else if (value > props.max) {
-            setValue(props.max);
+    handleBlur() {
+        if (this.value < this.props.min) {
+            this.value = this.props.min;
+        } else if (this.value > this.props.max) {
+            this.value = this.props.max;
         }
     };
 
-    return (
-        <div className={classes.root}>
-            <Typography id="input-slider" gutterBottom>
-                {props.title}
-            </Typography>
-            <Grid container spacing={2} alignItems="center">
-                <Grid item xs>
-                    <Slider
-                        value={typeof value === 'number' ? value : 0}
-                        onChange={handleSliderChange}
-                        aria-labelledby="input-slider"
-                        step={props.step}
-                        min={props.min}
-                        max={props.max}
-                    />
+    render() {
+        this.props.onChange(this); // => for onChange event in parent
+        const { classes } = this.props;
+        return (
+            <div className={classes.root}>
+                <Typography id="input-slider" gutterBottom>
+                    {this.props.title}
+                </Typography>
+                <Grid container spacing={2} alignItems="center">
+                    <Grid item xs>
+                        <Slider
+                            value={typeof this.value === 'number' ? this.value : 0}
+                            onChange={this.handleSliderChange.bind(this)}
+                            aria-labelledby="input-slider"
+                            step={this.props.step}
+                            min={this.props.min}
+                            max={this.props.max}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <Input
+                            className={classes.input}
+                            value={this.value}
+                            margin="dense"
+                            onChange={this.handleInputChange.bind(this)}
+                            onBlur={this.handleBlur.bind(this)}
+                            type="number"
+                            inputProps={{
+                                step: 1,
+                                min: this.props.min,
+                                max: this.props.max,
+                                type: 'number',
+                                'aria-labelledby': 'input-slider',
+                            }}
+                        />
+                    </Grid>
                 </Grid>
-                <Grid item>
-                    <Input
-                        className={classes.input}
-                        value={value}
-                        margin="dense"
-                        onChange={handleInputChange}
-                        onBlur={handleBlur}
-                        type="number"
-                        inputRef={UserInputRef}
-                        inputProps={{
-                            step: 1,
-                            min: props.min,
-                            max: props.max,
-                            type: 'number',
-                            'aria-labelledby': 'input-slider',
-                        }}
-                    />
-                </Grid>
-            </Grid>
-        </div>
-    );
+            </div>
+        );
+    }
 }
 
-export default InputSlider;
+export default withStyles(useStyles) (InputSlider);
