@@ -7,7 +7,7 @@
     "min-width": 360,
     "min-height": 440,
     "width": 520,
-    "height": 640
+    "height": 660
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",

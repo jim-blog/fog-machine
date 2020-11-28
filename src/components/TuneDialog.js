@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, {Component} from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -9,86 +9,121 @@ import DialogActions from "@material-ui/core/DialogActions";
 import TuneIcon from "@material-ui/icons/Tune";
 import InputSlider from 'components/InputSlider';
 
-function TuneDialog(props) {
-    const [open, setOpen] = React.useState(false);
-    const NameRef = useRef();
-    const ArduinoIpAddressRef = useRef();
-    const T1Ref = useRef();
-    const NRef = useRef();
-    const T2Ref = useRef();
-    const T3Ref = useRef();
+class TuneDialog extends Component {
 
-    const {
-        state
-    } = props;
+    constructor(props) {
+        super(props);
+        this.state = { settings: this.props.settings, open: false };
+        this.setState(this.state);
+        this.handleBlur = this.handleBlur.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleClickOpen = this.handleClickOpen.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+        this.NameRef = this.props.settings.name;
+        this.ArduinoIpAddressRef = this.props.settings.arduinoIpAddress;
+        this.T1Ref = this.props.settings.T1;
+        this.NRef = this.props.settings.N;
+        this.T2Ref = this.props.settings.T2;
+        this.T3Ref = this.props.settings.T3;
+    }
 
-    const handleClickOpen = () => {
+    handleBlur(e) {
+        console.log('handleChange')
+        console.log(e.target.value);
+    }
+
+    handleChange(e) {
+        console.log('handleChange')
+        console.log(e.target.value);
+    }
+
+    handleClickOpen() {
+        console.log(JSON.stringify(this.state));
         const win = nw.Window.get();
-        win.resizeTo(520, 640);
-        setOpen(true);
-    };
+        win.resizeTo(520, 660);
+        this.setState({open: true});
+    }
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    handleClose() {
+        console.log('handleClose')
+        this.setState({open: false});
+    }
 
-    const handleSave = () => {
-        state.settings.name = NameRef.current.value;
-        state.settings.arduinoIpAddress = ArduinoIpAddressRef.current.value;
-        state.settings.T1 = parseInt(T1Ref.current.value)
-        state.settings.N = parseInt(NRef.current.value)
-        state.settings.T2 = parseInt(T2Ref.current.value)
-        state.settings.T3 = parseInt(T3Ref.current.value)
-        setOpen(false);
-    };
+    handleSave() {
+        console.log('handleSave')
+        console.log(this.T1Ref)
+        console.log(this.NRef)
+        const prevState = this.state;
+        prevState.settings.name = this.NameRef;
+        prevState.settings.arduinoIpAddress = this.ArduinoIpAddressRef;
+        prevState.settings.T1 = this.T1Ref;
+        prevState.settings.N = this.NRef;
+        prevState.settings.T2 = this.T2Ref;
+        prevState.settings.T3 = this.T3Ref;
+        prevState.open = false;
+        console.log(JSON.stringify(prevState))
+        this.setState(prevState);
+        this.props.onChange(this.props.open); // => for onChange event in parent
+    }
 
-    return (
-        <div className="TuneDialog">
-            <Button startIcon={<TuneIcon />} color="secondary" aria-label="tune" onClick={handleClickOpen}>
-                Settings
-            </Button>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Settings</DialogTitle>
-                <DialogContent>
-                    <div>
-                        <TextField autoFocus margin="dense" id="Name" label="Name"
-                                   type="text" inputRef={NameRef}
-                                   defaultValue={state.settings.name}
+    render() {
+        return (
+            <div className="TuneDialog" >
+                <Button startIcon={<TuneIcon/>} color="secondary" aria-label="tune" onClick={this.handleClickOpen}>
+                    Settings
+                </Button>
+                <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title">Settings</DialogTitle>
+                    <DialogContent>
+                        <div>
+                            <TextField autoFocus margin="dense" id="Name" label="Name"
+                                       type="text"
+                                       defaultValue={this.NameRef}
+                                       onChange={(e) => {this.NameRef = e.target.value}}
+                            />
+                        </div>
+                        <div>
+                            <TextField autoFocus margin="dense" id="ArduinoIpAddress" label="Arduino Prop IP Address"
+                                       type="text"
+                                       defaultValue={this.ArduinoIpAddressRef}
+                                       onChange={(e) => {this.ArduinoIpAddressRef = e.target.value}}
+                            />
+                        </div>
+                        <p></p>
+                        <InputSlider title={"T1 (minutes)"} step={1} min={1} max={60}
+                                     value={this.T1Ref}
+                                     onBlur={this.handleBlur}
+                                     onChange={(e) => {this.T1Ref = e.target.value}}
                         />
-                    </div>
-                    <div>
-                        <TextField autoFocus margin="dense" id="ArduinoIpAddress" label="Arduino Prop IP Address"
-                                   type="text" inputRef={ArduinoIpAddressRef}
-                                   defaultValue={state.settings.arduinoIpAddress}
+                        <InputSlider title={"N (times)"} step={1} min={1} max={10}
+                                     value={this.NRef}
+                                     onChange={(e) => {this.NRef = e.target.value}}
                         />
-                    </div>
-                    <InputSlider title={"T1 (minutes)"} step={1} min={1} max={60} value={state.settings.T1}
-                                 inputRef={T1Ref}
-                    />
-                    <InputSlider title={"N (times)"} step={1} min={1} max={10} value={state.settings.N}
-                                 inputRef={NRef}
-                    />
-                    <InputSlider title={"T2 (seconds)"} step={1} min={1} max={60} value={state.settings.T2}
-                                 inputRef={T2Ref}
-                    />
-                    <InputSlider title={"T3 (seconds)"} step={1} min={1} max={60} value={state.settings.T3}
-                                 inputRef={T3Ref}
-                    />
-                    <DialogContentText>
-                        Spit every T1 seconds, N times for T2 seconds, pausing T3 seconds.
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Cancel
-                    </Button>
-                    <Button onClick={handleSave} color="primary">
-                        Save
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
-    );
+                        <InputSlider title={"T2 (seconds)"} step={1} min={1} max={60}
+                                     value={this.T2Ref}
+                                     onChange={(e) => {this.T2Ref = e.target.value}}
+                        />
+                        <InputSlider title={"T3 (seconds)"} step={1} min={1} max={60}
+                                     value={this.T3Ref}
+                                     onChange={(e) => {this.T3Ref = e.target.value}}
+                        />
+                        <DialogContentText>
+                            Spit every T1 seconds, N times for T2 seconds, pausing T3 seconds.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">
+                            Cancel
+                        </Button>
+                        <Button onClick={this.handleSave} color="primary">
+                            Save
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+        );
+    }
 }
 
 export default TuneDialog;

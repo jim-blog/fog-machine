@@ -8,25 +8,43 @@ import 'App.css';
 const fs = require('fs-extra')
 
 class App extends Component {
-    state = {
-        settings: {
-            name: 'Fog Machine',
-            arduinoIpAddress: '192.168.1.201',
-            T1: 10,
-            N: 2,
-            T2: 5,
-            T3: 5
-        },
-        prop: {
-            power: 1,
-            fog: 0
-        }
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            settings: {
+                name: 'Fog Machine',
+                arduinoIpAddress: '192.168.1.201',
+                T1: 10,
+                N: 2,
+                T2: 5,
+                T3: 5
+            },
+            machine: {
+                power: 1,
+                fog: 0
+            }
+        };
+    }
+
+    handlePowerOffClicked(e) {
+        console.log('handlePowerOffClicked');
+        const prevState = this.state
+        prevState.machine.power = 0;
+        this.setState(prevState); // => render
+    }
+
+    handlePowerOnClicked(e) {
+        console.log('handlePowerOnClicked');
+        const prevState = this.state
+        prevState.machine.power = 1;
+        this.setState(prevState); // => render
+    }
 
     render() {
         return (
             <div className="App">
-                <header className="App-header" state={this.state}>
+                <header className="App-header">
                     {this.state.settings.name}
                 </header>
                 <div className="App-panel">
@@ -35,14 +53,14 @@ class App extends Component {
                             <Led className="Led"
                                  alt="power"
                                  label="POWER"
-                                 state={this.state.prop.power}
+                                 state={this.state.machine.power}
                             />
                         </Grid>
                         <Grid item xs={6}>
                             <Led className="Led"
                                  alt="fog"
                                  label="FOG"
-                                 state={this.state.prop.fog}
+                                 state={this.state.machine.fog}
                             />
                         </Grid>
                     </Grid>
@@ -54,13 +72,13 @@ class App extends Component {
                     <Grid container spacing={2} alignItems="center">
                         <Grid item xs={6}>
                             <ArduinoButton state={this.state}
-                                           onClick={() => alert(this.state.settings.arduinoIpAddress)}>
+                                           onClick={this.handlePowerOnClicked.bind(this)}>
                                 POWER ON
                             </ArduinoButton>
                         </Grid>
                         <Grid item xs={6}>
                             <ArduinoButton state={this.state}
-                                           onClick={() => alert(this.state.settings.arduinoIpAddress)}>
+                                           onClick={this.handlePowerOffClicked.bind(this)}>
                                 POWER OFF
                             </ArduinoButton>
                         </Grid>
@@ -91,7 +109,9 @@ class App extends Component {
                     </Grid>
                     <Grid container spacing={2} padding={10} alignItems="center">
                         <Grid item xs={6}>
-                            <TuneDialog title={""} state={this.state}
+                            <TuneDialog
+                                settings={this.state.settings}
+                                onChange={(e) => {this.setState(this.state)}}
                             />
                         </Grid>
                     </Grid>
