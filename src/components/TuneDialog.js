@@ -51,7 +51,7 @@ class TuneDialog extends Component {
         prevState.settings.T2 = this.T2Ref;
         prevState.settings.T3 = this.T3Ref;
         prevState.open = false;
-        console.log(JSON.stringify(prevState))
+        //console.log(JSON.stringify(prevState))
         this.setState(prevState);
         this.props.onChange(this.props.open); // => for onChange event in parent
     }
