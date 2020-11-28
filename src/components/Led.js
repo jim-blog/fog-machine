@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import LedBlack from "images/led-circle-black.svg";
+import LedGrey from "images/led-circle-grey.svg";
 import LedYellow from "images/led-circle-yellow.svg";
 
 class Led extends Component {
@@ -24,7 +24,7 @@ class Led extends Component {
                     <img
                         className={className}
                         alt={alt}
-                        src={state === 1 ? LedYellow :LedBlack}
+                        src={state === 1 ? LedYellow : LedGrey}
                     />
                 </Grid>
             </Grid>
