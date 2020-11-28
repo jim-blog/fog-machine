@@ -10,7 +10,7 @@ const useStyles = theme => ({
         width: 400,
     },
     input: {
-        width: 52,
+        width: 40,
     },
 });
 
@@ -50,7 +50,7 @@ class InputSlider extends Component {
                     {this.props.title}
                 </Typography>
                 <Grid container spacing={2} alignItems="center">
-                    <Grid item xs>
+                    <Grid item xs={10}>
                         <Slider
                             value={typeof this.value === 'number' ? this.value : 0}
                             onChange={this.handleSliderChange.bind(this)}
@@ -60,7 +60,7 @@ class InputSlider extends Component {
                             max={this.props.max}
                         />
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={2}>
                         <Input
                             className={classes.input}
                             value={this.value}
