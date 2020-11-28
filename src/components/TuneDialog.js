@@ -29,6 +29,12 @@ class TuneDialog extends Component {
     handleClickOpen() {
         const win = nw.Window.get();
         win.resizeTo(520, 660);
+        this.NameRef = this.props.settings.name;
+        this.ArduinoIpAddressRef = this.props.settings.arduinoIpAddress;
+        this.T1Ref = this.props.settings.T1;
+        this.NRef = this.props.settings.N;
+        this.T2Ref = this.props.settings.T2;
+        this.T3Ref = this.props.settings.T3;
         this.setState({open: true});
     }
 
