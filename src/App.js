@@ -6,6 +6,7 @@ import Led from 'components/Led';
 import 'App.css';
 
 const fs = require('fs-extra')
+const os = require('os');
 
 class App extends Component {
     constructor(props) {
@@ -26,8 +27,11 @@ class App extends Component {
             }
         };
 
-        if (fs.existsSync('settings.json')) {
-            const settings = fs.readJsonSync('settings.json', { throws: false })
+        console.log(os.homedir());
+        const settings_path = os.homedir() + "\\AppData\\Local\\fog_settings.json"
+
+        if (fs.existsSync(settings_path)) {
+            const settings = fs.readJsonSync(settings_path, { throws: false })
             if (settings) {
                 console.log(settings)
                 this.state.settings = settings;

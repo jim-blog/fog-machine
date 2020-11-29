@@ -10,6 +10,7 @@ import TuneIcon from "@material-ui/icons/Tune";
 import InputSlider from 'components/InputSlider';
 
 const fs = require('fs-extra')
+const os = require('os');
 
 class TuneDialog extends Component {
 
@@ -54,7 +55,9 @@ class TuneDialog extends Component {
         prevState.settings.T3 = this.T3Ref;
         prevState.open = false;
         //console.log(JSON.stringify(prevState))
-        fs.writeJsonSync('settings.json', prevState.settings)
+        console.log(os.homedir());
+        const settings_path = os.homedir() + "\\AppData\\Local\\fog_settings.json"
+        fs.writeJsonSync(settings_path, prevState.settings)
         this.setState(prevState);
         this.props.onChange(this.props.open); // => for onChange event in parent
     }
