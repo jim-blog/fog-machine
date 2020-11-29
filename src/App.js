@@ -14,7 +14,7 @@ class App extends Component {
         this.state = {
             settings: {
                 name: 'Fog Machine',
-                arduinoIpAddress: '192.168.1.201',
+                arduinoIpAddress: '',
                 T1: 10,
                 N: 2,
                 T2: 5,
@@ -25,6 +25,14 @@ class App extends Component {
                 fog: 0
             }
         };
+
+        if (fs.existsSync('settings.json')) {
+            const settings = fs.readJsonSync('settings.json', { throws: false })
+            if (settings) {
+                console.log(settings)
+                this.state.settings = settings;
+            }
+        }
     }
 
     handlePowerOffClicked(e) {
@@ -118,22 +126,6 @@ class App extends Component {
                 </div>
             </div>
         );
-    }
-
-    componentDidMount() {
-        if (fs.existsSync('settings.json')) {
-            //let content = fs.readFileSync('settings.json', "utf8");
-            //alert(content);
-            fs.readJson('settings.json', {throws: false})
-                .then(obj => {
-                    console.log(obj)
-                })
-                .catch(err => {
-                    console.error(err)
-                })
-        } else {
-            alert("no settings...");
-        }
     }
 }
 

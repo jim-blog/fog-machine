@@ -9,6 +9,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import TuneIcon from "@material-ui/icons/Tune";
 import InputSlider from 'components/InputSlider';
 
+const fs = require('fs-extra')
+
 class TuneDialog extends Component {
 
     constructor(props) {
@@ -52,6 +54,7 @@ class TuneDialog extends Component {
         prevState.settings.T3 = this.T3Ref;
         prevState.open = false;
         //console.log(JSON.stringify(prevState))
+        fs.writeJsonSync('settings.json', prevState.settings)
         this.setState(prevState);
         this.props.onChange(this.props.open); // => for onChange event in parent
     }
