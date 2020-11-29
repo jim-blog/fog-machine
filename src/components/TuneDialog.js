@@ -16,6 +16,7 @@ class TuneDialog extends Component {
 
     constructor(props) {
         super(props);
+        //console.log(this.props);
         this.state = {settings: this.props.settings, open: false};
         this.setState(this.state);
         this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -55,7 +56,7 @@ class TuneDialog extends Component {
         prevState.settings.T3 = this.T3Ref;
         prevState.open = false;
         //console.log(JSON.stringify(prevState))
-        console.log(os.homedir());
+        //console.log(os.homedir());
         const settings_path = os.homedir() + "\\AppData\\Local\\fog_settings.json"
         fs.writeJsonSync(settings_path, prevState.settings)
         this.setState(prevState);

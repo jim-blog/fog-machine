@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ArduinoButton from 'components/ArduinoButton';
 import TuneDialog from 'components/TuneDialog';
-import Grid from "@material-ui/core/Grid";
+import Grid from '@material-ui/core/Grid';
 import Led from 'components/Led';
 import 'App.css';
 
@@ -24,18 +24,23 @@ class App extends Component {
             machine: {
                 power: 1,
                 fog: 0
-            }
+            },
+            status: "",
         };
 
-        console.log(os.homedir());
+        //console.log(os.homedir());
         const settings_path = os.homedir() + "\\AppData\\Local\\fog_settings.json"
 
         if (fs.existsSync(settings_path)) {
-            const settings = fs.readJsonSync(settings_path, { throws: false })
+            const settings = fs.readJsonSync(settings_path, {throws: false})
             if (settings) {
-                console.log(settings)
+                //console.log(settings)
                 this.state.settings = settings;
             }
+        }
+
+        if (!this.state.settings.arduinoIpAddress) {
+            this.state.status = "Arduino IP address is missing";
         }
     }
 
@@ -57,9 +62,9 @@ class App extends Component {
         return (
             <div className="App">
                 <header className="App-header">
-                    {this.state.settings.name}
+                    {this.state.settings.name} {this.state.status}
                 </header>
-                <div className="App-panel">
+                <div className="App-panel" id="panel">
                     <Grid container spacing={2} alignItems="center">
                         <Grid item xs={6}>
                             <Led className="Led"
@@ -123,7 +128,15 @@ class App extends Component {
                         <Grid item xs={6}>
                             <TuneDialog
                                 settings={this.state.settings}
-                                onChange={(e) => {this.setState(this.state)}}
+                                onChange={(e) => {
+                                    const prevState = this.state;
+                                    if (this.state.settings.arduinoIpAddress) {
+                                        prevState.status = "";
+                                    } else {
+                                        prevState.status = "Arduino IP address is missing";
+                                    }
+                                    this.setState(prevState)
+                                }}
                             />
                         </Grid>
                     </Grid>
