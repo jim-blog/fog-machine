@@ -1,6 +1,5 @@
 {
   "name": "fog-controller",
-  "description": "A controller for Arduino Fog prop.",
   "version": "0.1.0",
   "private": true,
   "window": {
