@@ -3,6 +3,11 @@
 
 > Early draft development stage.
 
+
+## To be done ...
+
+* use `argv` for `settings.json` to allow several controllers
+
 ## Resources
 
 * 
