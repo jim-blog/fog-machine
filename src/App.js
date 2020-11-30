@@ -70,7 +70,27 @@ class App extends Component {
             .then((response) => {
                 console.log(response);
                 const prevState = this.state
-                prevState.status = "";
+                if (response.status === 200) {
+                    prevState.status = "";
+                    if ('state' in response.data) {
+                        for (const param in prevState.machine) {
+                            //console.log(param);
+                            if (param in response.data.state) {
+                                prevState.machine[param] = response.data.state[param];
+                            }
+                        }
+                    }
+                    if ('settings' in response.data) {
+                        for (const param in prevState.settings) {
+                            //console.log(param);
+                            if (param in response.data.settings) {
+                                prevState.settings[param] = response.data.settings[param];
+                            }
+                        }
+                    }
+                } else {
+                    prevState.status = "Network error: unexpected response";
+                }
                 this.setState(prevState); // => render
             }, (error) => {
                 console.log(error);
