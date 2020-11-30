@@ -13,8 +13,10 @@
   color: #61dafb;
 }
 
-.App-link {
-  color: #61dafb;
+.App-status-bar {
+  color: orange;
+  font-size: 0.7em;
+  margin-top: 0.4em;
 }
 
 .App-panel {

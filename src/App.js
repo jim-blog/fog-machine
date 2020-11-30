@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
+import Box from "@material-ui/core/Box";
 import ArduinoButton from 'components/ArduinoButton';
 import TuneDialog from 'components/TuneDialog';
 import Grid from '@material-ui/core/Grid';
 import Led from 'components/Led';
 import 'App.css';
+import axios from 'axios';
 
 const fs = require('fs-extra')
 const os = require('os');
@@ -39,9 +41,23 @@ class App extends Component {
             }
         }
 
-        if (!this.state.settings.arduinoIpAddress) {
+        if (this.state.settings.arduinoIpAddress) {
+            this.getArduinoState();
+        } else {
             this.state.status = "Arduino IP address is missing";
         }
+
+        this.timer = setInterval(() => { this.getArduinoState(); },
+            10*1000);
+    }
+
+    getArduinoState() {
+        axios.get('//' + this.state.settings.arduinoIpAddress)
+            .then((response) => {
+                console.log(response);
+            }, (error) => {
+                console.log(error);
+            });
     }
 
     handlePowerOffClicked(e) {
@@ -62,7 +78,10 @@ class App extends Component {
         return (
             <div className="App">
                 <header className="App-header">
-                    {this.state.settings.name} {this.state.status}
+                    {this.state.settings.name}
+                    <Box className={"App-status-bar"}>
+                        {this.state.status}
+                    </Box>
                 </header>
                 <div className="App-panel" id="panel">
                     <Grid container spacing={2} alignItems="center">
@@ -132,6 +151,7 @@ class App extends Component {
                                     const prevState = this.state;
                                     if (this.state.settings.arduinoIpAddress) {
                                         prevState.status = "";
+                                        this.getArduinoState();
                                     } else {
                                         prevState.status = "Arduino IP address is missing";
                                     }
