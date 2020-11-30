@@ -30,6 +30,8 @@ class App extends Component {
             status: "",
         };
 
+        this.timer = null;
+
         //console.log(os.homedir());
         const settings_path = os.homedir() + "\\AppData\\Local\\fog_settings.json"
 
@@ -41,22 +43,40 @@ class App extends Component {
             }
         }
 
-        if (this.state.settings.arduinoIpAddress) {
-            this.getArduinoState();
-        } else {
+        if (!this.state.settings.arduinoIpAddress) {
             this.state.status = "Arduino IP address is missing";
         }
+    }
 
-        this.timer = setInterval(() => { this.getArduinoState(); },
-            10*1000);
+    componentDidMount() {
+        if (this.state.settings.arduinoIpAddress) {
+            this.getArduinoState();
+            console.log('CREATE TIMER');
+            this.timer = setInterval(() => {
+                    this.getArduinoState();
+                },
+                10 * 1000);
+        }
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
     }
 
     getArduinoState() {
-        axios.get('//' + this.state.settings.arduinoIpAddress)
+        console.log('getArduinoState', this.state.settings.arduinoIpAddress);
+        axios.get('//' + this.state.settings.arduinoIpAddress,
+            {timeout: 3000})
             .then((response) => {
                 console.log(response);
+                const prevState = this.state
+                prevState.status = "";
+                this.setState(prevState); // => render
             }, (error) => {
                 console.log(error);
+                const prevState = this.state
+                prevState.status = "Network error: " + error.message;
+                this.setState(prevState); // => render
             });
     }
 
@@ -152,6 +172,12 @@ class App extends Component {
                                     if (this.state.settings.arduinoIpAddress) {
                                         prevState.status = "";
                                         this.getArduinoState();
+                                        console.log('RECREATE TIMER');
+                                        clearInterval(this.timer);
+                                        this.timer = setInterval(() => {
+                                                this.getArduinoState();
+                                            },
+                                            10 * 1000);
                                     } else {
                                         prevState.status = "Arduino IP address is missing";
                                     }
