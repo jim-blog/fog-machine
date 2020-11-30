@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import TuneIcon from "@material-ui/icons/Tune";
 import InputSlider from 'components/InputSlider';
+import axios from "axios";
 
 const fs = require('fs-extra')
 const os = require('os');
@@ -61,6 +62,34 @@ class TuneDialog extends Component {
         fs.writeJsonSync(settings_path, prevState.settings)
         this.setState(prevState);
         this.props.onChange(this.props.open); // => for onChange event in parent
+        const data = {
+            "T1": this.T1Ref,
+            "N": this.NRef,
+            "T2": this.T2Ref,
+            "T3": this.T3Ref
+        };
+        this.postArduinoState(data);
+    }
+
+    postArduinoState(data) {
+        console.log('postArduinoState', data);
+        axios.post('//' + this.ArduinoIpAddressRef, data,
+            {timeout: 3000})
+            .then((response) => {
+                console.log(response);
+                const prevState = this.state
+                if (response.status === 200) {
+                    prevState.status = "";
+                } else {
+                    prevState.status = "Network error: unexpected response";
+                }
+                this.setState(prevState); // => render
+            }, (error) => {
+                console.log(error);
+                const prevState = this.state
+                prevState.status = "Network error: " + error.message;
+                this.setState(prevState); // => render
+            });
     }
 
     render() {

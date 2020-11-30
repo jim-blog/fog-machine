@@ -55,7 +55,7 @@ class App extends Component {
             this.timer = setInterval(() => {
                     this.getArduinoState();
                 },
-                10 * 1000);
+                30 * 1000);
         }
     }
 
@@ -72,11 +72,11 @@ class App extends Component {
                 const prevState = this.state
                 if (response.status === 200) {
                     prevState.status = "";
-                    if ('state' in response.data) {
+                    if ('machine' in response.data) {
                         for (const param in prevState.machine) {
                             //console.log(param);
-                            if (param in response.data.state) {
-                                prevState.machine[param] = response.data.state[param];
+                            if (param in response.data.machine) {
+                                prevState.machine[param] = response.data.machine[param];
                             }
                         }
                     }
@@ -197,7 +197,7 @@ class App extends Component {
                                         this.timer = setInterval(() => {
                                                 this.getArduinoState();
                                             },
-                                            10 * 1000);
+                                            30 * 1000);
                                     } else {
                                         prevState.status = "Arduino IP address is missing";
                                     }
