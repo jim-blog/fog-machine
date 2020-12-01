@@ -89,14 +89,21 @@ class App extends Component {
                         }
                     }
                 } else {
-                    prevState.status = "Network error: unexpected response";
+                    prevState.status = "Error: " + response.status + response.statusText + " @" + this.state.settings.arduinoIpAddress;
                 }
                 this.setState(prevState); // => render
             }, (error) => {
                 console.log(error);
                 const prevState = this.state
-                prevState.status = "Network error: " + error.message;
-                this.setState(prevState); // => render
+                if (error.message.startsWith("Network Error")) {
+                    prevState.status = error.message + " @" + prevState.settings.arduinoIpAddress;
+                    alert(prevState.status);
+                    this.setState(prevState); // => render
+                } else {
+                    prevState.status = "Network error: " + error.message + " @" + prevState.settings.arduinoIpAddress;
+                    alert(prevState.status);
+                    this.setState(prevState); // => render
+                }
             });
     }
 
