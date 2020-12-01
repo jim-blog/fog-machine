@@ -68,12 +68,12 @@ class TuneDialog extends Component {
             "T2": this.T2Ref,
             "T3": this.T3Ref
         };
-        this.postArduinoState(data);
+        this.postArduinoState('/settings', data);
     }
 
-    postArduinoState(data) {
-        console.log('postArduinoState', data);
-        axios.post('//' + this.ArduinoIpAddressRef, data,
+    postArduinoState(api, data) {
+        console.log('postArduinoState', api, data);
+        axios.post('//' + this.ArduinoIpAddressRef + api, data,
             {timeout: 3000})
             .then((response) => {
                 console.log(response);
@@ -81,13 +81,15 @@ class TuneDialog extends Component {
                 if (response.status === 200) {
                     prevState.status = "";
                 } else {
-                    prevState.status = "Network error: unexpected response";
+                    prevState.status = "Error: " + response.status + response.statusText + " @" + this.ArduinoIpAddressRef;
+                    alert(prevState.status);
                 }
                 this.setState(prevState); // => render
             }, (error) => {
                 console.log(error);
                 const prevState = this.state
-                prevState.status = "Network error: " + error.message;
+                prevState.status = "Network error: " + error.message + " @" + this.ArduinoIpAddressRef;
+                alert(prevState.status);
                 this.setState(prevState); // => render
             });
     }
