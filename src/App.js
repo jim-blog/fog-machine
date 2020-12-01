@@ -97,11 +97,9 @@ class App extends Component {
                 const prevState = this.state
                 if (error.message.startsWith("Network Error")) {
                     prevState.status = error.message + " @" + prevState.settings.arduinoIpAddress;
-                    alert(prevState.status);
                     this.setState(prevState); // => render
                 } else {
                     prevState.status = "Network error: " + error.message + " @" + prevState.settings.arduinoIpAddress;
-                    alert(prevState.status);
                     this.setState(prevState); // => render
                 }
             });
