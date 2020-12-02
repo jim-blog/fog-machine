@@ -62,33 +62,36 @@ class TuneDialog extends Component {
         fs.writeJsonSync(settings_path, prevState.settings)
         this.setState(prevState);
         this.props.onChange(this.props.open); // => for onChange event in parent
-        const data = {
-            "T1": this.T1Ref,
-            "N": this.NRef,
-            "T2": this.T2Ref,
-            "T3": this.T3Ref
-        };
-        this.postArduinoState('/settings', data);
+        const data = `${this.T1Ref},${this.NRef},${this.T2Ref},${this.T3Ref}`
+        this.requestArduinoApi('settings', data);
     }
 
-    postArduinoState(api, data) {
-        console.log('postArduinoState', api, data);
-        axios.post('//' + this.ArduinoIpAddressRef + api, data,
+    requestArduinoApi(service="", value="") {
+        console.log('requestArduinoApi', service, value);
+        axios.get(String(value).length > 0 ? `//${this.state.settings.arduinoIpAddress}/${service}/${value}`
+            : `//${this.state.settings.arduinoIpAddress}/${service}`,
             {timeout: 3000})
             .then((response) => {
                 console.log(response);
                 const prevState = this.state
                 if (response.status === 200) {
-                    prevState.status = "";
+                    let result = response.data.match(/(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)/);
+                    if (result && result.length === 7) {
+                        prevState.settings.t1 = parseInt(result[1]);
+                        prevState.settings.n = parseInt(result[2]);
+                        prevState.settings.t2 = parseInt(result[3]);
+                        prevState.settings.t3 = parseInt(result[4]);
+                    } else {
+                        prevState.status = "Error: unexpected answer @" + this.state.settings.arduinoIpAddress;
+                    }
                 } else {
-                    prevState.status = "Error: " + response.status + response.statusText + " @" + this.ArduinoIpAddressRef;
-                    alert(prevState.status);
+                    prevState.status = "Error: " + response.status + response.statusText + " @" + this.state.settings.arduinoIpAddress;
                 }
                 this.setState(prevState); // => render
             }, (error) => {
                 console.log(error);
                 const prevState = this.state
-                prevState.status = "Network error: " + error.message + " @" + this.ArduinoIpAddressRef;
+                prevState.status = "Network error: " + error.message + " @" + this.state.settings.arduinoIpAddress;
                 alert(prevState.status);
                 this.setState(prevState); // => render
             });

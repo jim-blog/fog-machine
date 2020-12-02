@@ -51,73 +51,72 @@ class App extends Component {
     componentDidMount() {
         nw.Window.get().showDevTools();
         if (this.state.settings.arduinoIpAddress) {
-            this.getArduinoState();
+            this.requestArduinoApi();
             console.log('CREATE TIMER');
             this.timer = setInterval(() => {
-                    this.getArduinoState();
+                    this.requestArduinoApi();
                 },
                 30 * 1000);
         }
+    }
+
+    handleFogOffClicked(e) {
+        console.log('handlePowerOffClicked');
+        this.requestArduinoApi('fog', 0)
+    }
+
+    handleFogOnClicked(e) {
+        console.log('handlePowerOnClicked');
+        this.requestArduinoApi('fog', 1)
+    }
+
+    handlePowerOffClicked(e) {
+        console.log('handlePowerOffClicked');
+        this.requestArduinoApi('power', 0)
+    }
+
+    handlePowerOnClicked(e) {
+        console.log('handlePowerOnClicked');
+        this.requestArduinoApi('power', 1)
     }
 
     componentWillUnmount() {
         clearInterval(this.timer);
     }
 
-    getArduinoState() {
-        console.log('getArduinoState', this.state.settings.arduinoIpAddress);
-        axios.get('//' + this.state.settings.arduinoIpAddress,
+    requestArduinoApi(service="", value="") {
+        console.log('requestArduinoApi', service, value);
+        axios.get(String(value).length > 0 ? `//${this.state.settings.arduinoIpAddress}/${service}/${value}`
+                                                : `//${this.state.settings.arduinoIpAddress}/${service}`,
             {timeout: 3000})
             .then((response) => {
                 console.log(response);
                 const prevState = this.state
                 if (response.status === 200) {
-                    prevState.status = "";
-                    if ('machine' in response.data) {
-                        for (const param in prevState.machine) {
-                            //console.log(param);
-                            if (param in response.data.machine) {
-                                prevState.machine[param] = response.data.machine[param];
-                            }
-                        }
-                    }
-                    if ('settings' in response.data) {
-                        for (const param in prevState.settings) {
-                            //console.log(param);
-                            if (param in response.data.settings) {
-                                prevState.settings[param] = response.data.settings[param];
-                            }
-                        }
+                    let result = response.data.match(/(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)/);
+                    if (result && result.length === 7) {
+                        prevState.settings.t1 = parseInt(result[1]);
+                        prevState.settings.n = parseInt(result[2]);
+                        prevState.settings.t2 = parseInt(result[3]);
+                        prevState.settings.t3 = parseInt(result[4]);
+                        prevState.machine.power = parseInt(result[5]);
+                        prevState.machine.fog = parseInt(result[6]);
+                        console.log("SET STATE prev",prevState);
+                    } else {
+                        prevState.status = "Error: unexpected answer @" + this.state.settings.arduinoIpAddress;
                     }
                 } else {
                     prevState.status = "Error: " + response.status + response.statusText + " @" + this.state.settings.arduinoIpAddress;
                 }
+                console.log("SET STATE");
                 this.setState(prevState); // => render
             }, (error) => {
                 console.log(error);
                 const prevState = this.state
-                if (error.message.startsWith("Network Error")) {
-                    prevState.status = error.message + " @" + prevState.settings.arduinoIpAddress;
-                    this.setState(prevState); // => render
-                } else {
-                    prevState.status = "Network error: " + error.message + " @" + prevState.settings.arduinoIpAddress;
-                    this.setState(prevState); // => render
-                }
+                prevState.status = "Network error: " + error.message + " @" + this.state.settings.arduinoIpAddress;
+                alert(prevState.status);
+                this.setState(prevState); // => render
             });
-    }
-
-    handlePowerOffClicked(e) {
-        console.log('handlePowerOffClicked');
-        const prevState = this.state
-        prevState.machine.power = 0;
-        this.setState(prevState); // => render
-    }
-
-    handlePowerOnClicked(e) {
-        console.log('handlePowerOnClicked');
-        const prevState = this.state
-        prevState.machine.power = 1;
-        this.setState(prevState); // => render
     }
 
     render() {
@@ -173,14 +172,14 @@ class App extends Component {
                     <Grid container spacing={2} padding={10} alignItems="center">
                         <Grid item xs={6}>
                             <ArduinoButton state={this.state}
-                                           onClick={() => alert(this.state.settings.arduinoIpAddress)}>
-                                SPIT ON
+                                           onClick={this.handleFogOnClicked.bind(this)}>
+                                FOG ON
                             </ArduinoButton>
                         </Grid>
                         <Grid item xs={6}>
                             <ArduinoButton state={this.state}
-                                           onClick={() => alert(this.state.settings.arduinoIpAddress)}>
-                                SPIT OFF
+                                           onClick={this.handleFogOffClicked.bind(this)}>
+                                FOG OFF
                             </ArduinoButton>
                         </Grid>
                     </Grid>
@@ -197,11 +196,11 @@ class App extends Component {
                                     const prevState = this.state;
                                     if (this.state.settings.arduinoIpAddress) {
                                         prevState.status = "";
-                                        this.getArduinoState();
+                                        this.requestArduinoApi();
                                         console.log('RECREATE TIMER');
                                         clearInterval(this.timer);
                                         this.timer = setInterval(() => {
-                                                this.getArduinoState();
+                                                this.requestArduinoApi();
                                             },
                                             30 * 1000);
                                     } else {
