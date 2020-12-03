@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import Button from "@material-ui/core/Button";
+import React, {Component} from 'react'
+import Button from '@material-ui/core/Button';
 
 class ArduinoButton extends Component {
     render() {
