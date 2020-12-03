@@ -13,10 +13,10 @@
   color: #61dafb;
 }
 
-.App-status-bar {
+.App-status-box {
   color: orange;
-  font-size: 0.7em;
-  margin-top: 0.4em;
+  font-size: 0.55em;
+  margin-top: 0.2em;
 }
 
 .App-panel {
