@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, createRef} from 'react';
 import Box from "@material-ui/core/Box";
 import ArduinoButton from 'components/ArduinoButton';
 import TuneDialog from 'components/TuneDialog';
+import AlertDialog from 'components/AlertDialog';
 import Grid from '@material-ui/core/Grid';
 import Led from 'components/Led';
 import 'App.css';
@@ -30,6 +31,7 @@ class App extends Component {
             status: "",
         };
 
+        this.alertRef = createRef()
         this.timer = null;
 
         //console.log(os.homedir());
@@ -112,7 +114,7 @@ class App extends Component {
                 console.log(error);
                 const prevState = this.state
                 prevState.status = "Network error: " + error.message + " @" + this.state.settings.arduinoIpAddress;
-                alert(prevState.status);
+                this.alertRef.current.handleClickOpen("Warning", prevState.status);
                 this.setState(prevState); // => render
             });
     }
@@ -126,7 +128,7 @@ class App extends Component {
                         {this.state.status}
                     </Box>
                 </header>
-                <div className="App-panel" id="panel">
+                <div className="App-panel">
                     <Grid container spacing={2} alignItems="center">
                         <Grid item xs={6}>
                             <Led className="Led"
@@ -207,6 +209,14 @@ class App extends Component {
                                     this.setState(prevState)
                                 }}
                             />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <AlertDialog
+                                ref={ this.alertRef}
+                                aria-labelledby="alert-dialog-title"
+                                aria-describedby="alert-dialog-description"
+                            >
+                            </AlertDialog>
                         </Grid>
                     </Grid>
                 </div>
