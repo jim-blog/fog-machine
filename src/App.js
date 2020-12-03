@@ -103,6 +103,7 @@ class App extends Component {
                         prevState.settings.T3 = parseInt(result[4]);
                         prevState.machine.power = parseInt(result[5]);
                         prevState.machine.fog = parseInt(result[6]);
+                        prevState.status = "";
                     } else {
                         prevState.status = "Error: unexpected answer @" + this.state.settings.arduinoIpAddress;
                     }
