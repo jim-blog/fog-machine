@@ -18,10 +18,12 @@
     "axios": "^0.21.0",
     "contentful": "^7.14.14",
     "fs-extra": "^9.0.1",
+    "i18next": "^19.8.4",
     "loglevel": "^1.7.1",
     "nw-react-scripts": "3.4.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-i18next": "^11.7.4",
     "react-material-ui-form-validator": "^2.1.1"
   },
   "scripts": {
