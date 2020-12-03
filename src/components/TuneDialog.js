@@ -81,6 +81,7 @@ class TuneDialog extends Component {
                         prevState.settings.n = parseInt(result[2]);
                         prevState.settings.t2 = parseInt(result[3]);
                         prevState.settings.t3 = parseInt(result[4]);
+                        prevState.status = "";
                     } else {
                         prevState.status = "Error: unexpected answer @" + this.state.settings.arduinoIpAddress;
                     }
