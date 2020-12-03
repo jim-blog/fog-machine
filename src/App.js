@@ -95,20 +95,18 @@ class App extends Component {
                 if (response.status === 200) {
                     let result = response.data.match(/(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)/);
                     if (result && result.length === 7) {
-                        prevState.settings.t1 = parseInt(result[1]);
-                        prevState.settings.n = parseInt(result[2]);
-                        prevState.settings.t2 = parseInt(result[3]);
-                        prevState.settings.t3 = parseInt(result[4]);
+                        prevState.settings.T1 = parseInt(result[1]);
+                        prevState.settings.N = parseInt(result[2]);
+                        prevState.settings.T2 = parseInt(result[3]);
+                        prevState.settings.T3 = parseInt(result[4]);
                         prevState.machine.power = parseInt(result[5]);
                         prevState.machine.fog = parseInt(result[6]);
-                        console.log("SET STATE prev",prevState);
                     } else {
                         prevState.status = "Error: unexpected answer @" + this.state.settings.arduinoIpAddress;
                     }
                 } else {
                     prevState.status = "Error: " + response.status + response.statusText + " @" + this.state.settings.arduinoIpAddress;
                 }
-                console.log("SET STATE");
                 this.setState(prevState); // => render
             }, (error) => {
                 console.log(error);
