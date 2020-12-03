@@ -1,6 +1,7 @@
 import React, {Component, createRef} from 'react';
 import { withTranslation } from 'react-i18next';
 import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
 import ArduinoButton from 'components/ArduinoButton';
 import TuneDialog from 'components/TuneDialog';
 import AlertDialog from 'components/AlertDialog';
@@ -187,6 +188,46 @@ class App extends Component {
                                            onClick={this.handleFogOffClicked.bind(this)}>
                                 {t('FOG OFF')}
                             </ArduinoButton>
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={2} alignItems="center">
+                        <Grid item xs={6}>
+                            <p></p>
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={2} padding={10} alignItems="center">
+                        <Grid item xs={9}>
+                            <ArduinoButton state={this.state}
+                                           onClick={this.handleFogOnClicked.bind(this)}>
+                                start arduino fog program
+                            </ArduinoButton>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <ArduinoButton state={this.state}
+                                           onClick={this.handleFogOffClicked.bind(this)}>
+                                stop
+                            </ArduinoButton>
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={2} alignItems="center">
+                        <Grid item xs={6}>
+                            <p></p>
+                        </Grid>
+                    </Grid>
+                    <Grid container spacing={2} padding={10} alignItems="center">
+                        <Grid item xs={9}>
+                            <Button state={this.state}
+                                    color="primary"
+                                    onClick={this.handleFogOnClicked.bind(this)}>
+                                start controller fog program
+                            </Button>
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Button state={this.state}
+                                    color="primary"
+                                    onClick={this.handleFogOffClicked.bind(this)}>
+                                stop
+                            </Button>
                         </Grid>
                     </Grid>
                     <Grid container spacing={2} alignItems="center">
