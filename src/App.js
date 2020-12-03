@@ -124,7 +124,7 @@ class App extends Component {
             <div className="App">
                 <header className="App-header">
                     {this.state.settings.name}
-                    <Box className={"App-status-bar"}>
+                    <Box className={"App-status-box"}>
                         {this.state.status}
                     </Box>
                 </header>
