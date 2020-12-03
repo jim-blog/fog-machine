@@ -126,25 +126,25 @@ class TuneDialog extends Component {
                             />
                         </div>
                         <p></p>
-                        <InputSlider title={"T1 (minutes)"} step={1} min={1} max={60}
+                        <InputSlider title={"Fog program: T1 (minutes)"} step={1} min={1} max={60}
                                      value={this.T1Ref}
                                      onChange={(e) => {
                                          this.T1Ref = e.value
                                      }}
                         />
-                        <InputSlider title={"N (times)"} step={1} min={1} max={10}
+                        <InputSlider title={"Fog program: N (times)"} step={1} min={1} max={10}
                                      value={this.NRef}
                                      onChange={(e) => {
                                          this.NRef = e.value
                                      }}
                         />
-                        <InputSlider title={"T2 (seconds)"} step={1} min={1} max={60}
+                        <InputSlider title={"Fog program: T2 (seconds)"} step={1} min={1} max={60}
                                      value={this.T2Ref}
                                      onChange={(e) => {
                                          this.T2Ref = e.value
                                      }}
                         />
-                        <InputSlider title={"T3 (seconds)"} step={1} min={1} max={60}
+                        <InputSlider title={"Fog program: T3 (seconds)"} step={1} min={1} max={60}
                                      value={this.T3Ref}
                                      ref={this.T3Ref}
                                      onChange={(e) => {
@@ -152,7 +152,7 @@ class TuneDialog extends Component {
                                      }}
                         />
                         <DialogContentText>
-                            Spit every T1 seconds, N times for T2 seconds, pausing T3 seconds.
+                            Program: spit fog every T1 seconds, N times for T2 seconds, pausing T3 seconds.
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>

@@ -1,4 +1,5 @@
 import React, {Component, createRef} from 'react';
+import { withTranslation } from 'react-i18next';
 import Box from "@material-ui/core/Box";
 import ArduinoButton from 'components/ArduinoButton';
 import TuneDialog from 'components/TuneDialog';
@@ -15,9 +16,12 @@ class App extends Component {
     constructor(props) {
         super(props);
 
+        this.props.i18n.changeLanguage('fr');
+        const { t } = this.props;
+
         this.state = {
             settings: {
-                name: 'Fog Machine',
+                name: t('Fog Machine'),
                 arduinoIpAddress: '',
                 T1: 10,
                 N: 2,
@@ -121,6 +125,7 @@ class App extends Component {
     }
 
     render() {
+        const { t } = this.props;
         return (
             <div className="App">
                 <header className="App-header">
@@ -134,14 +139,14 @@ class App extends Component {
                         <Grid item xs={6}>
                             <Led className="Led"
                                  alt="power"
-                                 label="POWER"
+                                 label={t('POWER')}
                                  state={this.state.machine.power}
                             />
                         </Grid>
                         <Grid item xs={6}>
                             <Led className="Led"
                                  alt="fog"
-                                 label="FOG"
+                                 label={t('FOG')}
                                  state={this.state.machine.fog}
                             />
                         </Grid>
@@ -155,13 +160,13 @@ class App extends Component {
                         <Grid item xs={6}>
                             <ArduinoButton state={this.state}
                                            onClick={this.handlePowerOnClicked.bind(this)}>
-                                POWER ON
+                                {t('POWER ON')}
                             </ArduinoButton>
                         </Grid>
                         <Grid item xs={6}>
                             <ArduinoButton state={this.state}
                                            onClick={this.handlePowerOffClicked.bind(this)}>
-                                POWER OFF
+                                {t('POWER OFF')}
                             </ArduinoButton>
                         </Grid>
                     </Grid>
@@ -174,13 +179,13 @@ class App extends Component {
                         <Grid item xs={6}>
                             <ArduinoButton state={this.state}
                                            onClick={this.handleFogOnClicked.bind(this)}>
-                                FOG ON
+                                {t('FOG ON')}
                             </ArduinoButton>
                         </Grid>
                         <Grid item xs={6}>
                             <ArduinoButton state={this.state}
                                            onClick={this.handleFogOffClicked.bind(this)}>
-                                FOG OFF
+                                {t('FOG OFF')}
                             </ArduinoButton>
                         </Grid>
                     </Grid>
@@ -226,4 +231,8 @@ class App extends Component {
     }
 }
 
-export default App;
+const AppI18n = withTranslation()(App)
+
+// i18n translations might still be loaded by the http backend
+// use react's Suspense
+export default AppI18n;

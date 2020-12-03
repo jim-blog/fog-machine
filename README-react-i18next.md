@@ -6,11 +6,11 @@
 
 ## To be done ...
 
-* use `argv` for `settings.json` to allow several controllers
 
 ## Resources
 
-* 
+* <a href="https://react.i18next.com/guides/quick-start" target="_blank">react-i18next documentation > Quick start</a>
+* <a href="https://react.i18next.com/latest/using-with-hooks" target="_blank">react-i18next documentation > Step by step guide</a>
 
 
 ## Author
