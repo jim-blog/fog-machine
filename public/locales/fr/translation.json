@@ -1,4 +1,9 @@
 {
   "Fog Machine": "Machine à brume",
-  "POWER ON": "MARCHE"
+  "POWER": "COURANT 220V",
+  "FOG": "BRUME",
+  "POWER ON": "MARCHE",
+  "POWER OFF": "ARRÊT",
+  "FOG ON": "BRUME OUVERTE",
+  "FOG OFF": "BRUME FERMÉE"
 }

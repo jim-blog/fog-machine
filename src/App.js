@@ -1,6 +1,6 @@
 import React, {Component, createRef} from 'react';
 import { withTranslation } from 'react-i18next';
-import Box from "@material-ui/core/Box";
+import Box from '@material-ui/core/Box';
 import ArduinoButton from 'components/ArduinoButton';
 import TuneDialog from 'components/TuneDialog';
 import AlertDialog from 'components/AlertDialog';
@@ -66,6 +66,10 @@ class App extends Component {
         }
     }
 
+    componentWillUnmount() {
+        clearInterval(this.timer);
+    }
+
     handleFogOffClicked(e) {
         console.log('handlePowerOffClicked');
         this.requestArduinoApi('fog', 0)
@@ -84,10 +88,6 @@ class App extends Component {
     handlePowerOnClicked(e) {
         console.log('handlePowerOnClicked');
         this.requestArduinoApi('power', 1)
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timer);
     }
 
     requestArduinoApi(service="", value="") {

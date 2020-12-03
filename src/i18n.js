@@ -1,44 +1,44 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
+import LanguageDetector from 'i18next-browser-languagedetector';
+// don't want to use this?
+// have a look at the Quick start guide
+// for passing in lng and translations on init
 
-// the translations
-// (tip move them in a JSON file and import them)
-const resources = {
-    en: {
-        translation: {
-            "Fog Machine": "Fog Machine",
-            "POWER": "POWER",
-            "FOG": "FOG",
-            "POWER ON": "POWER ON",
-            "POWER OFF": "POWER OFF",
-            "FOG ON": "FOG ON",
-            "FOG OFF": "FOG OFF"
-        }
-    },
-    fr: {
-        translation: {
-            "Fog Machine": "Machine à brume",
-            "POWER": "COURANT 220V",
-            "FOG": "BRUME",
-            "POWER ON": "MARCHE",
-            "POWER OFF": "ARRÊT",
-            "FOG ON": "BRUME OUVERTE",
-            "FOG OFF": "BRUME FERMÉE"
-        }
-    }
-};
+import translation_en from "../public/locales/en/translation.json";
+import translation_fr from "../public/locales/fr/translation.json";
 
 i18n
-    .use(initReactI18next) // passes i18n down to react-i18next
+    // detect user language
+    // learn more: https://github.com/i18next/i18next-browser-languageDetector
+    .use(LanguageDetector)
+    // pass the i18n instance to react-i18next.
+    .use(initReactI18next)
+    // init i18next
+    // for all options read: https://www.i18next.com/overview/configuration-options
     .init({
-        resources,
-        lng: "en",
+        debug: true,
 
-        keySeparator: false, // we do not use keys in form messages.welcome
+        react: {
+            useSuspense: false
+        },
+
+        lng: 'en',
+        fallbackLng: 'en',
+        whitelist: ['en', 'fr'],
 
         interpolation: {
-            escapeValue: false // react already safes from xss
-        }
+            escapeValue: false, // not needed for react as it escapes by default
+        },
+
+        resources: {
+            en: {
+                translation: translation_en               // 'common' is our custom namespace
+            },
+            fr: {
+                translation: translation_fr
+            },
+        },
     });
 
 export default i18n;

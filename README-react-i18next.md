@@ -1,11 +1,11 @@
 # React i18n
 *React internationalization.*
 
-> Early draft development stage.
 
+## BabelEdit
 
-## To be done ...
-
+* <a href="https://www.codeandweb.com/babeledithttps://www.codeandweb.com/babeledit" target="_blank">BabelEdit</a>
+* <a href="https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-react-app-with-react-i18next" target="_blank">How to translate your React app with react-i18next</a>
 
 ## Resources
 
