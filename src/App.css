@@ -11,12 +11,14 @@
   justify-content: center;
   font-size: calc(16px + 2vmin);
   color: #61dafb;
+  padding-top: 0.4em;
 }
 
 .App-status-box {
   color: orange;
-  font-size: 0.55em;
-  margin-top: 0.2em;
+  font-size: 0.6em;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
 }
 
 .App-panel {
