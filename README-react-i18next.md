@@ -2,18 +2,40 @@
 *React internationalization.*
 
 
-## Extract JSON translations with `babel-plugin-react-intl-auto`
+## Extract JSON translations with `babel-plugin-i18next-extract`
 
 ```bash
-$ npm install babel-plugin-react-intl-auto
+$ npm install babel-plugin-i18next-extract
 ```
 
+Create `.babelrc` file:
+```bash
+{
+  "presets": ["@babel/preset-react"],
+  "plugins": [
+    ["i18next-extract", {"nsSeparator": "~"}],
+    // […] your other plugins […]
+  ]
+}
+```
 
+Add *babel* script in `package.json`:
+```json
+"scripts": {
+  "babel": "babel ./src/**/*.{js,jsx,ts,tsx}",
+  "start": "nw-react-scripts start",
+  "build": "nw-react-scripts build",
+  "test": "nw-react-scripts test",
+  "eject": "nw-react-scripts eject"
+},
+```
+
+Run *babel* script (Webstorm Tools Alt+F11), translations are then in **extractedTranslations** folder.
 
 ## BabelEdit
 
 * <a href="https://www.codeandweb.com/babeledithttps://www.codeandweb.com/babeledit" target="_blank">BabelEdit</a>
-* <a href="https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-react-app-with-react-i18next" target="_blank">How to translate your React app with react-i18next</a>
+* <a href="https://github.com/gilbsgilbs/babel-plugin-i18next-extract" target="_blank">babel-plugin-i18next-extract</a>
 
 
 ## Resources
