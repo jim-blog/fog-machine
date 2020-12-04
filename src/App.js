@@ -2,6 +2,7 @@ import React, {Component, createRef} from 'react';
 import { withTranslation } from 'react-i18next';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import ArduinoButton from 'components/ArduinoButton';
 import TuneDialog from 'components/TuneDialog';
 import AlertDialog from 'components/AlertDialog';
@@ -159,10 +160,10 @@ class App extends Component {
                     </Grid>
                     <Grid container spacing={2} alignItems="center">
                         <Grid item xs={6}>
-                            <ArduinoButton state={this.state}
-                                           onClick={this.handlePowerOnClicked.bind(this)}>
-                                {t('POWER ON')}
-                            </ArduinoButton>
+                                <ArduinoButton state={this.state}
+                                               onClick={this.handlePowerOnClicked.bind(this)}>
+                                    {t('POWER ON')}
+                                </ArduinoButton>
                         </Grid>
                         <Grid item xs={6}>
                             <ArduinoButton state={this.state}
@@ -197,13 +198,25 @@ class App extends Component {
                     </Grid>
                     <Grid container spacing={2} padding={10} alignItems="center">
                         <Grid item xs={9}>
-                            <ArduinoButton state={this.state}
+                            <ArduinoButton tooltip={
+                                <React.Fragment>
+                                    <Typography color="inherit">Start Arduino fog sequence</Typography>
+                                    <hr/>
+                                    The fog sequence is controlled by the Arduino <em>onboard</em> sketch
+                                </React.Fragment>
+                            }
+                                           state={this.state}
                                            onClick={this.handleFogOnClicked.bind(this)}>
                                 start arduino fog program
                             </ArduinoButton>
                         </Grid>
                         <Grid item xs={3}>
-                            <ArduinoButton state={this.state}
+                            <ArduinoButton tooltip={
+                                <React.Fragment>
+                                    <Typography color="inherit">Stop Arduino fog sequence</Typography>
+                                </React.Fragment>
+                            }
+                                           state={this.state}
                                            onClick={this.handleFogOffClicked.bind(this)}>
                                 stop
                             </ArduinoButton>
@@ -219,7 +232,7 @@ class App extends Component {
                             <Button state={this.state}
                                     color="primary"
                                     onClick={this.handleFogOnClicked.bind(this)}>
-                                start controller fog program
+                                start fog program
                             </Button>
                         </Grid>
                         <Grid item xs={3}>
