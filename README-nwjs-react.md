@@ -174,7 +174,7 @@ To create a production build, use npm run build.
 
 * <a href="https://github.com/naviapps/create-nw-react-app" target="_blank">Create NW.js React App</a>
 * <a href="https://medium.com/@matteofumagalli1275/setting-up-nw-js-react-materialui-from-scratch-5a83c3f58355" target="_blank">Setting up NW.JS + React + MaterialUI From Scratch</a>
-
+* <a href="https://blog.usejournal.com/how-to-build-android-apps-with-node-js-using-android-js-2aa4643be87b" target="_blank">How To Build Android Apps With Node JS Using Android JS</a>
 
 ## Author
 
