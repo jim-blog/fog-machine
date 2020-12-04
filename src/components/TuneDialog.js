@@ -152,7 +152,8 @@ class TuneDialog extends Component {
                                      }}
                         />
                         <DialogContentText>
-                            Program: spit fog every T1 seconds, N times for T2 seconds, pausing T3 seconds.
+                            Fog program: spit fog every <em>T1</em> seconds, <em>N</em> times for <em>T2</em> seconds,
+                            pausing <em>T3</em> seconds.
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
