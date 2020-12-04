@@ -2,7 +2,8 @@
 
 # proect related
 src*.7z
-extractedTranslations
+/dist
+/extractedTranslations
 .idea
 
 # dependencies
