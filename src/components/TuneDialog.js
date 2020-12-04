@@ -93,7 +93,7 @@ class TuneDialog extends Component {
             }, (error) => {
                 console.log(error);
                 const prevState = this.state
-                prevState.status = t("Network error: ") + error.message + " @" + this.state.settings.arduinoIpAddress;
+                prevState.status = t("Network error") + ": "  + error.message + " @" + this.state.settings.arduinoIpAddress;
                 this.setState(prevState); // => render
             });
     }
@@ -103,7 +103,7 @@ class TuneDialog extends Component {
         return (
             <div className="TuneDialog">
                 <Button startIcon={<TuneIcon/>} color="secondary" aria-label="tune" onClick={this.handleClickOpen}>
-                    Settings
+                    {t('Settings')}
                 </Button>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">{t('Settings')}</DialogTitle>
@@ -127,25 +127,25 @@ class TuneDialog extends Component {
                             />
                         </div>
                         <p></p>
-                        <InputSlider title={t("Fog program: T1 (minutes)")} step={1} min={1} max={60}
+                        <InputSlider title={t("Fog program") + ": " + t("T1 (minutes)")} step={1} min={1} max={60}
                                      value={this.T1Ref}
                                      onChange={(e) => {
                                          this.T1Ref = e.value
                                      }}
                         />
-                        <InputSlider title={t("Fog program: N (times)")} step={1} min={1} max={10}
+                        <InputSlider title={t("Fog program") + ": " + t("N (times)")} step={1} min={1} max={10}
                                      value={this.NRef}
                                      onChange={(e) => {
                                          this.NRef = e.value
                                      }}
                         />
-                        <InputSlider title={t("Fog program: T2 (seconds)")} step={1} min={1} max={60}
+                        <InputSlider title={t("Fog program") + ": " + t("T2 (seconds)")} step={1} min={1} max={60}
                                      value={this.T2Ref}
                                      onChange={(e) => {
                                          this.T2Ref = e.value
                                      }}
                         />
-                        <InputSlider title={t("Fog program: T3 (seconds)")} step={1} min={1} max={60}
+                        <InputSlider title={t("Fog program") + ": " + t("T3 (seconds)")} step={1} min={1} max={60}
                                      value={this.T3Ref}
                                      ref={this.T3Ref}
                                      onChange={(e) => {
@@ -159,10 +159,10 @@ class TuneDialog extends Component {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary">
-                            Cancel
+                            {t('Cancel')}
                         </Button>
                         <Button onClick={this.handleSave} color="primary">
-                            Save
+                            {t('Save')}
                         </Button>
                     </DialogActions>
                 </Dialog>

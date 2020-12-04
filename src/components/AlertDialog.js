@@ -30,6 +30,7 @@ class AlertDialog extends Component {
     };
 
     render() {
+        const { t } = this.props;
         return (
             <div>
                 <Dialog
@@ -48,7 +49,7 @@ class AlertDialog extends Component {
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary">
-                            Dismiss
+                            {t('Dismiss')}
                         </Button>
                     </DialogActions>
                 </Dialog>
