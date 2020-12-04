@@ -7,6 +7,10 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 
+/*
+Warning: A string ref, "15", has been found within a strict mode tree. String refs are a source
+of potential bugs and should be avoided. We recommend using useRef() or createRef() instead.
+ */
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
