@@ -275,7 +275,7 @@ class App extends Component {
                         <Grid item xs={6}>
                             <AlertDialog
                                 t = {t}
-                                ref={ this.alertRef}
+                                ref={this.alertRef}
                                 aria-labelledby="alert-dialog-title"
                                 aria-describedby="alert-dialog-description"
                             >
