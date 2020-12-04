@@ -1,0 +1,22 @@
+{
+  "Arduino IP address is missing": "",
+  "Arduino Prop IP Address": "",
+  "Fog": "",
+  "Fog Led": "",
+  "Fog Machine": "",
+  "Fog OFF": "",
+  "Fog ON": "",
+  "Name": "",
+  "Power": "",
+  "Power Led": "",
+  "Power OFF": "",
+  "Power ON": "",
+  "Settings": "",
+  "Start Arduino fog sequence": "",
+  "Start arduino fog program": "",
+  "Start fog program": "",
+  "Stop": "",
+  "Stop Arduino fog sequence": "",
+  "The fog sequence is controlled by the Arduino <em>onboard</em> sketch": "",
+  "Warning": ""
+}

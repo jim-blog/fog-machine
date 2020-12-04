@@ -10,12 +10,19 @@
     "height": 480
   },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-flow": "^7.12.1",
+    "@babel/preset-react": "^7.12.7",
+    "@babel/preset-typescript": "^7.12.7",
+    "@babel/register": "^7.12.1",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.21.0",
+    "babel": "^6.23.0",
+    "babel-plugin-i18next-extract": "^0.8.2",
     "contentful": "^7.14.14",
     "fs-extra": "^9.0.1",
     "i18next": "^19.8.4",
@@ -30,6 +37,7 @@
     "react-material-ui-form-validator": "^2.1.1"
   },
   "scripts": {
+    "babel": "babel ./src/**/*.{js,jsx,ts,tsx}",
     "start": "nw-react-scripts start",
     "build": "nw-react-scripts build",
     "test": "nw-react-scripts test",
@@ -63,7 +71,11 @@
     "macIcns": "./src/logo.icns"
   },
   "description": "This project was bootstrapped with [Create NW.js React App](https://github.com/naviapps/create-nw-react-app).",
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"

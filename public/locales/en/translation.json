@@ -1,9 +1,9 @@
 {
   "Fog Machine": "Fog Machine",
-  "POWER": "POWER",
-  "FOG": "FOG",
-  "POWER ON": "POWER ON",
-  "POWER OFF": "POWER OFF",
-  "FOG ON": "FOG ON",
-  "FOG OFF": "FOG OFF"
+  "Power": "Power",
+  "Fog": "Fog",
+  "Power ON": "Power ON",
+  "Power OFF": "Power OFF",
+  "Fog ON": "Fog ON",
+  "Fog OFF": "Fog OFF"
 }

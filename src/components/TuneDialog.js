@@ -67,6 +67,7 @@ class TuneDialog extends Component {
     }
 
     requestArduinoApi(service="", value="") {
+        const { t } = this.props;
         console.log('requestArduinoApi', service, value);
         axios.get(String(value).length > 0 ? `//${this.state.settings.arduinoIpAddress}/${service}/${value}`
             : `//${this.state.settings.arduinoIpAddress}/${service}`,
@@ -83,32 +84,32 @@ class TuneDialog extends Component {
                         prevState.settings.t3 = parseInt(result[4]);
                         prevState.status = "";
                     } else {
-                        prevState.status = "Error: unexpected answer @" + this.state.settings.arduinoIpAddress;
+                        prevState.status = t("Error: unexpected answer @") + this.state.settings.arduinoIpAddress;
                     }
                 } else {
-                    prevState.status = "Error: " + response.status + response.statusText + " @" + this.state.settings.arduinoIpAddress;
+                    prevState.status = t("Error: ") + response.status + response.statusText + " @" + this.state.settings.arduinoIpAddress;
                 }
                 this.setState(prevState); // => render
             }, (error) => {
                 console.log(error);
                 const prevState = this.state
-                prevState.status = "Network error: " + error.message + " @" + this.state.settings.arduinoIpAddress;
-                alert(prevState.status);
+                prevState.status = t("Network error: ") + error.message + " @" + this.state.settings.arduinoIpAddress;
                 this.setState(prevState); // => render
             });
     }
 
     render() {
+        const { t } = this.props;
         return (
             <div className="TuneDialog">
                 <Button startIcon={<TuneIcon/>} color="secondary" aria-label="tune" onClick={this.handleClickOpen}>
                     Settings
                 </Button>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Settings</DialogTitle>
+                    <DialogTitle id="form-dialog-title">{t('Settings')}</DialogTitle>
                     <DialogContent>
                         <div>
-                            <TextField autoFocus margin="dense" id="Name" label="Name"
+                            <TextField autoFocus margin="dense" id="Name" label={t('Name')}
                                        type="text"
                                        defaultValue={this.NameRef}
                                        onChange={(e) => {
@@ -117,7 +118,7 @@ class TuneDialog extends Component {
                             />
                         </div>
                         <div>
-                            <TextField autoFocus margin="dense" id="ArduinoIpAddress" label="Arduino Prop IP Address"
+                            <TextField autoFocus margin="dense" id="ArduinoIpAddress" label={t('Arduino Prop IP Address')}
                                        type="text"
                                        defaultValue={this.ArduinoIpAddressRef}
                                        onChange={(e) => {
@@ -126,25 +127,25 @@ class TuneDialog extends Component {
                             />
                         </div>
                         <p></p>
-                        <InputSlider title={"Fog program: T1 (minutes)"} step={1} min={1} max={60}
+                        <InputSlider title={t("Fog program: T1 (minutes)")} step={1} min={1} max={60}
                                      value={this.T1Ref}
                                      onChange={(e) => {
                                          this.T1Ref = e.value
                                      }}
                         />
-                        <InputSlider title={"Fog program: N (times)"} step={1} min={1} max={10}
+                        <InputSlider title={t("Fog program: N (times)")} step={1} min={1} max={10}
                                      value={this.NRef}
                                      onChange={(e) => {
                                          this.NRef = e.value
                                      }}
                         />
-                        <InputSlider title={"Fog program: T2 (seconds)"} step={1} min={1} max={60}
+                        <InputSlider title={t("Fog program: T2 (seconds)")} step={1} min={1} max={60}
                                      value={this.T2Ref}
                                      onChange={(e) => {
                                          this.T2Ref = e.value
                                      }}
                         />
-                        <InputSlider title={"Fog program: T3 (seconds)"} step={1} min={1} max={60}
+                        <InputSlider title={t("Fog program: T3 (seconds)")} step={1} min={1} max={60}
                                      value={this.T3Ref}
                                      ref={this.T3Ref}
                                      onChange={(e) => {

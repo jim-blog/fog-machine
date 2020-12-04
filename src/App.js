@@ -52,7 +52,7 @@ class App extends Component {
         }
 
         if (!this.state.settings.arduinoIpAddress) {
-            this.state.status = "Arduino IP address is missing";
+            this.state.status = t("Arduino IP address is missing");
         }
     }
 
@@ -93,6 +93,7 @@ class App extends Component {
     }
 
     requestArduinoApi(service="", value="") {
+        const { t } = this.props;
         console.log('requestArduinoApi', service, value);
         axios.get(String(value).length > 0 ? `//${this.state.settings.arduinoIpAddress}/${service}/${value}`
                                                 : `//${this.state.settings.arduinoIpAddress}/${service}`,
@@ -111,17 +112,17 @@ class App extends Component {
                         prevState.machine.fog = parseInt(result[6]);
                         prevState.status = "";
                     } else {
-                        prevState.status = "Error: unexpected answer @" + this.state.settings.arduinoIpAddress;
+                        prevState.status = t("Error: unexpected answer @") + this.state.settings.arduinoIpAddress;
                     }
                 } else {
-                    prevState.status = "Error: " + response.status + response.statusText + " @" + this.state.settings.arduinoIpAddress;
+                    prevState.status = t("Error: ") + response.status + response.statusText + " @" + this.state.settings.arduinoIpAddress;
                 }
                 this.setState(prevState); // => render
             }, (error) => {
                 console.log(error);
                 const prevState = this.state
-                prevState.status = "Network error: " + error.message + " @" + this.state.settings.arduinoIpAddress;
-                this.alertRef.current.handleClickOpen("Warning", prevState.status);
+                prevState.status = t("Network error: ") + error.message + " @" + this.state.settings.arduinoIpAddress;
+                this.alertRef.current.handleClickOpen(t("Warning"), prevState.status);
                 this.setState(prevState); // => render
             });
     }
@@ -140,15 +141,15 @@ class App extends Component {
                     <Grid container spacing={2} alignItems="center">
                         <Grid item xs={6}>
                             <Led className="Led"
-                                 alt="power"
-                                 label={t('POWER')}
+                                 alt={t('Power Led')}
+                                 label={t('Power')}
                                  state={this.state.machine.power}
                             />
                         </Grid>
                         <Grid item xs={6}>
                             <Led className="Led"
-                                 alt="fog"
-                                 label={t('FOG')}
+                                 alt={t('Fog Led')}
+                                 label={t('Fog')}
                                  state={this.state.machine.fog}
                             />
                         </Grid>
@@ -162,13 +163,13 @@ class App extends Component {
                         <Grid item xs={6}>
                                 <ArduinoButton state={this.state}
                                                onClick={this.handlePowerOnClicked.bind(this)}>
-                                    {t('POWER ON')}
+                                    {t('Power ON')}
                                 </ArduinoButton>
                         </Grid>
                         <Grid item xs={6}>
                             <ArduinoButton state={this.state}
                                            onClick={this.handlePowerOffClicked.bind(this)}>
-                                {t('POWER OFF')}
+                                {t('Power OFF')}
                             </ArduinoButton>
                         </Grid>
                     </Grid>
@@ -181,13 +182,13 @@ class App extends Component {
                         <Grid item xs={6}>
                             <ArduinoButton state={this.state}
                                            onClick={this.handleFogOnClicked.bind(this)}>
-                                {t('FOG ON')}
+                                {t('Fog ON')}
                             </ArduinoButton>
                         </Grid>
                         <Grid item xs={6}>
                             <ArduinoButton state={this.state}
                                            onClick={this.handleFogOffClicked.bind(this)}>
-                                {t('FOG OFF')}
+                                {t('Fog OFF')}
                             </ArduinoButton>
                         </Grid>
                     </Grid>
@@ -200,25 +201,25 @@ class App extends Component {
                         <Grid item xs={9}>
                             <ArduinoButton tooltip={
                                 <React.Fragment>
-                                    <Typography color="inherit">Start Arduino fog sequence</Typography>
+                                    <Typography color="inherit">{t('Start Arduino fog sequence')}</Typography>
                                     <hr/>
-                                    The fog sequence is controlled by the Arduino <em>onboard</em> sketch
+                                    {t('The fog sequence is controlled by the Arduino <em>onboard</em> sketch')}
                                 </React.Fragment>
                             }
                                            state={this.state}
                                            onClick={this.handleFogOnClicked.bind(this)}>
-                                start arduino fog program
+                                {t('Start arduino fog program')}
                             </ArduinoButton>
                         </Grid>
                         <Grid item xs={3}>
                             <ArduinoButton tooltip={
                                 <React.Fragment>
-                                    <Typography color="inherit">Stop Arduino fog sequence</Typography>
+                                    <Typography color="inherit">{t('Stop Arduino fog sequence')}</Typography>
                                 </React.Fragment>
                             }
                                            state={this.state}
                                            onClick={this.handleFogOffClicked.bind(this)}>
-                                stop
+                                {t('Stop')}
                             </ArduinoButton>
                         </Grid>
                     </Grid>
@@ -232,14 +233,14 @@ class App extends Component {
                             <Button state={this.state}
                                     color="primary"
                                     onClick={this.handleFogOnClicked.bind(this)}>
-                                start fog program
+                                {t('Start fog program')}
                             </Button>
                         </Grid>
                         <Grid item xs={3}>
                             <Button state={this.state}
                                     color="primary"
                                     onClick={this.handleFogOffClicked.bind(this)}>
-                                stop
+                                {t('Stop')}
                             </Button>
                         </Grid>
                     </Grid>
@@ -251,6 +252,7 @@ class App extends Component {
                     <Grid container spacing={2} padding={10} alignItems="center">
                         <Grid item xs={6}>
                             <TuneDialog
+                                t = {t}
                                 settings={this.state.settings}
                                 onChange={(e) => {
                                     const prevState = this.state;
@@ -264,7 +266,7 @@ class App extends Component {
                                             },
                                             30 * 1000);
                                     } else {
-                                        prevState.status = "Arduino IP address is missing";
+                                        prevState.status = t("Arduino IP address is missing");
                                     }
                                     this.setState(prevState)
                                 }}

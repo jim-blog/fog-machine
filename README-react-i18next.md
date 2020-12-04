@@ -2,15 +2,25 @@
 *React internationalization.*
 
 
+## Extract JSON translations with `babel-plugin-react-intl-auto`
+
+```bash
+$ npm install babel-plugin-react-intl-auto
+```
+
+
+
 ## BabelEdit
 
 * <a href="https://www.codeandweb.com/babeledithttps://www.codeandweb.com/babeledit" target="_blank">BabelEdit</a>
 * <a href="https://www.codeandweb.com/babeledit/tutorials/how-to-translate-your-react-app-with-react-i18next" target="_blank">How to translate your React app with react-i18next</a>
 
+
 ## Resources
 
 * <a href="https://react.i18next.com/guides/quick-start" target="_blank">react-i18next documentation > Quick start</a>
 * <a href="https://react.i18next.com/latest/using-with-hooks" target="_blank">react-i18next documentation > Step by step guide</a>
+* <a href="https://github.com/akameco/babel-plugin-react-intl-auto" target="_blank">babel-plugin-react-intl-auto</a>
 
 
 ## Author
