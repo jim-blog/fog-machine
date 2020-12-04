@@ -2,6 +2,8 @@
 
 # proect related
 src*.7z
+extractedTranslations
+.idea
 
 # dependencies
 /node_modules
