@@ -18,22 +18,35 @@ class ArduinoButton extends Component {
         const {
             onClick,
             className = "",
-            tooltip,
+            tooltip = "",
             children,
         } = this.props;
 
-        return (
-            <HtmlTooltip arrow title={tooltip}>
-            <Button
-                onClick={onClick}
-                className={className}
-                variant="contained"
-                color="primary"
-            >
-                {children}
-            </Button>
-            </HtmlTooltip>
-        );
+        if ('tooltip' in this.props) {
+            return (
+                <HtmlTooltip arrow title={tooltip}>
+                    <Button
+                        onClick={onClick}
+                        className={className}
+                        variant="contained"
+                        color="primary"
+                    >
+                        {children}
+                    </Button>
+                </HtmlTooltip>
+            );
+        } else {
+            return (
+                <Button
+                    onClick={onClick}
+                    className={className}
+                    variant="contained"
+                    color="primary"
+                >
+                    {children}
+                </Button>
+            );
+        };
     }
 }
 
