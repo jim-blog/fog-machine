@@ -96,7 +96,7 @@ class App extends Component {
         const { t } = this.props;
         console.log('requestArduinoApi', service, value);
         axios.get(String(value).length > 0 ? `//${this.state.settings.arduinoIpAddress}/${service}/${value}`
-                                                : `//${this.state.settings.arduinoIpAddress}/${service}`,
+            : `//${this.state.settings.arduinoIpAddress}/${service}`,
             {timeout: 3000})
             .then((response) => {
                 console.log(response);
@@ -121,7 +121,7 @@ class App extends Component {
             }, (error) => {
                 console.log(error);
                 const prevState = this.state
-                prevState.status = t("Network error: ") + error.message + " @" + this.state.settings.arduinoIpAddress;
+                prevState.status = t("Network error") + ": " + error.message + " @" + this.state.settings.arduinoIpAddress;
                 this.alertRef.current.handleClickOpen(t("Warning"), prevState.status);
                 this.setState(prevState); // => render
             });
@@ -203,7 +203,7 @@ class App extends Component {
                                 <React.Fragment>
                                     <Typography color="inherit">{t('Start Arduino fog sequence')}</Typography>
                                     <hr/>
-                                    {t('The fog sequence is controlled by the Arduino <em>onboard</em> sketch')}
+                                    {t('The fog sequence is controlled by the Arduino onboard sketch')}
                                 </React.Fragment>
                             }
                                            state={this.state}
@@ -274,6 +274,7 @@ class App extends Component {
                         </Grid>
                         <Grid item xs={6}>
                             <AlertDialog
+                                t = {t}
                                 ref={ this.alertRef}
                                 aria-labelledby="alert-dialog-title"
                                 aria-describedby="alert-dialog-description"
