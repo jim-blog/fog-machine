@@ -7,6 +7,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import TuneIcon from "@material-ui/icons/Tune";
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import InputSlider from 'components/InputSlider';
 import axios from "axios";
 
@@ -23,17 +25,21 @@ class TuneDialog extends Component {
         this.handleClickOpen = this.handleClickOpen.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleSave = this.handleSave.bind(this);
+        this.UiLangRef = this.props.settings.uilang;
         this.NameRef = this.props.settings.name;
         this.ArduinoIpAddressRef = this.props.settings.arduinoIpAddress;
         this.T1Ref = this.props.settings.T1;
         this.NRef = this.props.settings.N;
         this.T2Ref = this.props.settings.T2;
         this.T3Ref = this.props.settings.T3;
+        this.initialUilang = this.props.settings.uilang;
     }
 
     handleClickOpen() {
         const win = nw.Window.get();
-        win.resizeTo(520, 660);
+        win.resizeTo(520, 720);
+        //console.log('OPEN SETTINGS', this.props.settings.uilang)
+        this.UiLangRef = this.props.settings.uilang;
         this.NameRef = this.props.settings.name;
         this.ArduinoIpAddressRef = this.props.settings.arduinoIpAddress;
         this.T1Ref = this.props.settings.T1;
@@ -44,11 +50,15 @@ class TuneDialog extends Component {
     }
 
     handleClose() {
-        this.setState({open: false});
+        const prevState = this.state;
+        prevState.settings.uilang = this.initialUilang;
+        prevState.open = false;
+        this.setState(prevState);
     }
 
     handleSave() {
         const prevState = this.state;
+        prevState.settings.uilang = this.UiLangRef;
         prevState.settings.name = this.NameRef;
         prevState.settings.arduinoIpAddress = this.ArduinoIpAddressRef;
         prevState.settings.T1 = this.T1Ref;
@@ -109,7 +119,7 @@ class TuneDialog extends Component {
                     <DialogTitle id="form-dialog-title">{t('Settings')}</DialogTitle>
                     <DialogContent>
                         <div>
-                            <TextField autoFocus margin="dense" id="Name" label={t('Name')}
+                            <TextField margin="dense" id="Name" label={t('Name')}
                                        type="text"
                                        defaultValue={this.NameRef}
                                        onChange={(e) => {
@@ -156,6 +166,24 @@ class TuneDialog extends Component {
                             Fog program: spit fog every <em>T1</em> seconds, <em>N</em> times for <em>T2</em> seconds,
                             pausing <em>T3</em> seconds.
                         </DialogContentText>
+                        <p></p>
+                        <div>
+                            <Select margin="dense" id="UiLang"
+                                    labelId="LabelUiLang"
+                                    value={this.UiLangRef}
+                                    defaultValue={'en'}
+                                    onChange={(e) => {
+                                        //console.log('SELECT', e.target.value);
+                                        this.UiLangRef = e.target.value;
+                                        const prevState = this.state;
+                                        prevState.settings.uilang = this.UiLangRef;
+                                        this.setState(prevState);
+                                    }}
+                            >
+                                <MenuItem value={'en'}>{t('Application in English')}</MenuItem>
+                                <MenuItem value={'fr'}>{t('Application in French')}</MenuItem>
+                            </Select>
+                        </div>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={this.handleClose} color="primary">

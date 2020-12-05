@@ -18,8 +18,9 @@ class App extends Component {
     constructor(props) {
         super(props);
 
-        this.props.i18n.changeLanguage('fr');
         const { t } = this.props;
+
+        this.props.i18n.changeLanguage('en');
 
         this.state = {
             settings: {
@@ -28,14 +29,17 @@ class App extends Component {
                 T1: 10,
                 N: 2,
                 T2: 5,
-                T3: 5
+                T3: 5,
+                uilang: this.props.i18n.language
             },
             machine: {
                 power: 1,
                 fog: 0
             },
-            status: "",
+            status: ''
         };
+
+        console.log('SETTINGS', this.state);
 
         this.alertRef = createRef()
         this.timer = null;
@@ -46,10 +50,12 @@ class App extends Component {
         if (fs.existsSync(settings_path)) {
             const settings = fs.readJsonSync(settings_path, {throws: false})
             if (settings) {
-                //console.log(settings)
+                console.log('SET SETTINGS', settings);
                 this.state.settings = settings;
             }
         }
+
+        this.props.i18n.changeLanguage(this.state.settings.uilang);
 
         if (!this.state.settings.arduinoIpAddress) {
             this.state.status = t("Arduino IP address is missing");
@@ -127,6 +133,15 @@ class App extends Component {
             });
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        if (nextState.settings.uilang !== this.props.i18n.language) {
+            console.log('CHANGE -----------', nextState.settings.uilang)
+            this.props.i18n.changeLanguage(nextState.settings.uilang);
+            return false;
+        }
+        return true;
+    }
+
     render() {
         const { t } = this.props;
         return (
@@ -139,18 +154,25 @@ class App extends Component {
                 </header>
                 <div className="App-panel">
                     <Grid container spacing={2} alignItems="center">
-                        <Grid item xs={6}>
+                        <Grid item xs={4}>
                             <Led className="Led"
                                  alt={t('Power Led')}
                                  label={t('Power')}
                                  state={this.state.machine.power}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs={4}>
                             <Led className="Led"
                                  alt={t('Fog Led')}
                                  label={t('Fog')}
                                  state={this.state.machine.fog}
+                            />
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Led className="Led"
+                                 alt={t('Fog sequence Led')}
+                                 label={t('Fog sequence')}
+                                 state={this.state.machine.sequence}
                             />
                         </Grid>
                     </Grid>
@@ -256,6 +278,7 @@ class App extends Component {
                                 settings={this.state.settings}
                                 onChange={(e) => {
                                     const prevState = this.state;
+                                    console.log('TUNE', prevState)
                                     if (this.state.settings.arduinoIpAddress) {
                                         prevState.status = "";
                                         this.requestArduinoApi();

@@ -1,4 +1,6 @@
 {
+  "Application in English": "Application in English",
+  "Application in French": "Application in French",
   "Arduino IP address is missing": "Arduino IP address is missing",
   "Arduino Prop IP Address": "Arduino Prop IP Address",
   "Cancel": "Cancel",
@@ -11,6 +13,8 @@
   "Fog OFF": "Fog OFF",
   "Fog ON": "Fog ON",
   "Fog program": "Fog program",
+  "Fog sequence": "Fog sequence",
+  "Fog sequence Led": "Fog sequence Led",
   "N (times)": "N (times)",
   "Name": "Name",
   "Network error": "Network error",
