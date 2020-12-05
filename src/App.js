@@ -34,8 +34,10 @@ class App extends Component {
             },
             machine: {
                 power: 1,
-                fog: 0
+                fog: 0,
+                sequence: 0
             },
+            sequence: 0,
             status: ''
         };
 
@@ -78,24 +80,23 @@ class App extends Component {
         clearInterval(this.timer);
     }
 
-
-    handleFogProgramOffClicked(e) {
-        console.log('handlePowerOffClicked');
-        this.requestArduinoApi('fog', 0)
+    handleArduinoSequenceOffClicked(e) {
+        console.log('handleArduinoSequenceOffClicked');
+        this.requestArduinoApi('sequence', 0)
     }
 
-    handleFogProgramOnClicked(e) {
-        console.log('handlePowerOnClicked');
-        this.requestArduinoApi('fog', 1)
+    handleArduinoSequenceOnClicked(e) {
+        console.log('handleArduinoSequenceOnClicked');
+        this.requestArduinoApi('sequence', 1)
     }
 
     handleFogOffClicked(e) {
-        console.log('handlePowerOffClicked');
+        console.log('handleFogOffClicked');
         this.requestArduinoApi('fog', 0)
     }
 
     handleFogOnClicked(e) {
-        console.log('handlePowerOnClicked');
+        console.log('handleFogOnClicked');
         this.requestArduinoApi('fog', 1)
     }
 
@@ -107,6 +108,16 @@ class App extends Component {
     handlePowerOnClicked(e) {
         console.log('handlePowerOnClicked');
         this.requestArduinoApi('power', 1)
+    }
+
+    handleSequenceOffClicked(e) {
+        console.log('handleSequenceOffClicked');
+
+    }
+
+    handleSequenceOnClicked(e) {
+        console.log('handlePowerOnClicked');
+
     }
 
     requestArduinoApi(service="", value="") {
@@ -179,19 +190,19 @@ class App extends Component {
                                  state={this.state.machine.fog}
                             />
                         </Grid>
-                        <Grid item xs={3}>
-                            <Led className="Led"
-                                 alt={t('Program Led')}
-                                 label={t('Fog program')}
-                                 state={this.state.machine.fog}
-                            />
-                        </Grid>
                         <Grid item xs={4}>
                             <Led className="Led"
                                  alt={t('Arduino sequence Led')}
                                  label={t('Arduino sequence')}
                                  tooltip={t('Fog program running on Arduino')}
                                  state={this.state.machine.sequence}
+                            />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Led className="Led"
+                                 alt={t('Program Led')}
+                                 label={t('Fog program')}
+                                 state={this.state.sequence}
                             />
                         </Grid>
                     </Grid>
@@ -248,7 +259,7 @@ class App extends Component {
                                 </React.Fragment>
                             }
                                            state={this.state}
-                                           onClick={this.handleFogOnClicked.bind(this)}>
+                                           onClick={this.handleArduinoSequenceOnClicked.bind(this)}>
                                 {t('Start arduino fog program')}
                             </ArduinoButton>
                         </Grid>
@@ -259,7 +270,7 @@ class App extends Component {
                                 </React.Fragment>
                             }
                                            state={this.state}
-                                           onClick={this.handleFogOffClicked.bind(this)}>
+                                           onClick={this.handleArduinoSequenceOffClicked.bind(this)}>
                                 {t('Stop')}
                             </ArduinoButton>
                         </Grid>
@@ -273,14 +284,14 @@ class App extends Component {
                         <Grid item xs={9}>
                             <Button state={this.state}
                                     color="primary"
-                                    onClick={this.handleFogProgramOnClicked.bind(this)}>
+                                    onClick={this.handleSequenceOnClicked.bind(this)}>
                                 {t('Start fog program')}
                             </Button>
                         </Grid>
                         <Grid item xs={3}>
                             <Button state={this.state}
                                     color="primary"
-                                    onClick={this.handleFogProgramOffClicked.bind(this)}>
+                                    onClick={this.handleSequenceOffClicked.bind(this)}>
                                 {t('Stop')}
                             </Button>
                         </Grid>
