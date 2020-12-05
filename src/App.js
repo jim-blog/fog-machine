@@ -78,6 +78,17 @@ class App extends Component {
         clearInterval(this.timer);
     }
 
+
+    handleFogProgramOffClicked(e) {
+        console.log('handlePowerOffClicked');
+        this.requestArduinoApi('fog', 0)
+    }
+
+    handleFogProgramOnClicked(e) {
+        console.log('handlePowerOnClicked');
+        this.requestArduinoApi('fog', 1)
+    }
+
     handleFogOffClicked(e) {
         console.log('handlePowerOffClicked');
         this.requestArduinoApi('fog', 0)
@@ -154,24 +165,32 @@ class App extends Component {
                 </header>
                 <div className="App-panel">
                     <Grid container spacing={2} alignItems="center">
-                        <Grid item xs={4}>
+                        <Grid item xs={3}>
                             <Led className="Led"
                                  alt={t('Power Led')}
                                  label={t('Power')}
                                  state={this.state.machine.power}
                             />
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={2}>
                             <Led className="Led"
                                  alt={t('Fog Led')}
                                  label={t('Fog')}
                                  state={this.state.machine.fog}
                             />
                         </Grid>
+                        <Grid item xs={3}>
+                            <Led className="Led"
+                                 alt={t('Program Led')}
+                                 label={t('Fog program')}
+                                 state={this.state.machine.fog}
+                            />
+                        </Grid>
                         <Grid item xs={4}>
                             <Led className="Led"
-                                 alt={t('Fog sequence Led')}
-                                 label={t('Fog sequence')}
+                                 alt={t('Arduino sequence Led')}
+                                 label={t('Arduino sequence')}
+                                 tooltip={t('Fog program running on Arduino')}
                                  state={this.state.machine.sequence}
                             />
                         </Grid>
@@ -254,14 +273,14 @@ class App extends Component {
                         <Grid item xs={9}>
                             <Button state={this.state}
                                     color="primary"
-                                    onClick={this.handleFogOnClicked.bind(this)}>
+                                    onClick={this.handleFogProgramOnClicked.bind(this)}>
                                 {t('Start fog program')}
                             </Button>
                         </Grid>
                         <Grid item xs={3}>
                             <Button state={this.state}
                                     color="primary"
-                                    onClick={this.handleFogOffClicked.bind(this)}>
+                                    onClick={this.handleFogProgramOffClicked.bind(this)}>
                                 {t('Stop')}
                             </Button>
                         </Grid>
