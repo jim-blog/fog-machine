@@ -45,6 +45,7 @@ class App extends Component {
 
         this.alertRef = createRef()
         this.timer = null;
+        this.fogProgramTimer = null;
 
         this.sequence = {
             N: 0,
@@ -93,6 +94,11 @@ class App extends Component {
 
     handleArduinoSequenceOnClicked(e) {
         console.log('handleArduinoSequenceOnClicked');
+        const { t } = this.props;
+        if (this.fogProgramTimer) {
+            this.alertRef.current.handleClickOpen(t("Not allowed"), t("Stop PC sequence to enable Arduino sequence."));
+            return;
+        }
         this.requestArduinoApi('sequence', 1)
     }
 
@@ -124,16 +130,41 @@ class App extends Component {
             this.sequence.N = 0;
             this.sequence.level = 0;
             this.requestArduinoApi('fog',  this.sequence.level)
+            this.setState({sequence: 0})
             console.log('RECREATE TIMER');
             this.timer = setInterval(() => {
                     this.requestArduinoApi();
                 },
                 30 * 1000);
         }
+        if (this.fogProgramTimer) {
+            clearInterval(this.fogProgramTimer);
+            this.fogProgramTimer = null;
+        }
     }
 
     handleSequenceOnClicked(e) {
         console.log('handleSequenceOnClicked');
+        const { t } = this.props;
+        if (this.state.machine.sequence === 1) {
+            this.alertRef.current.handleClickOpen(t("Not allowed"), t("Stop Arduino sequence to enable PC sequence."));
+            return;
+        }
+        if (this.fogProgramTimer) {
+            this.alertRef.current.handleClickOpen(t("Not allowed"), t("PC sequence already running."));
+            return;
+        }
+        this.setState({sequence: 1})
+        console.log('CREATE FOG PROGRAM TIMER');
+        this.fogProgramTimer = setInterval(() => {
+                if (this.sequence.N === 0) {
+                    clearInterval(this.timer);
+                    this.sequence.N = this.state.settings.N;
+                    this.sequence.level = 0;
+                    this.processSequence();
+                }
+            },
+            this.state.settings.T1 * 60 * 1000);
         if (this.sequence.N === 0) {
             clearInterval(this.timer);
             this.sequence.N = this.state.settings.N;
@@ -257,7 +288,8 @@ class App extends Component {
                         <Grid item xs={3}>
                             <Led className="Led"
                                  alt={t('Program Led')}
-                                 label={t('Fog program')}
+                                 label={t('PC sequence')}
+                                 tooltip={t('Fog program running on PC')}
                                  state={this.state.sequence}
                             />
                         </Grid>
@@ -341,7 +373,7 @@ class App extends Component {
                             <Button state={this.state}
                                     color="primary"
                                     onClick={this.handleSequenceOnClicked.bind(this)}>
-                                {t('Start fog program')}
+                                {t('Start fog program on PC')}
                             </Button>
                         </Grid>
                         <Grid item xs={3}>

@@ -26,6 +26,7 @@ i18n
         lng: 'en',
         fallbackLng: 'en',
         whitelist: ['en', 'fr'],
+        keySeparator: false,
 
         interpolation: {
             escapeValue: false, // not needed for react as it escapes by default
