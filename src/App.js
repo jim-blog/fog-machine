@@ -46,6 +46,12 @@ class App extends Component {
         this.alertRef = createRef()
         this.timer = null;
 
+        this.sequence = {
+            N: 0,
+            level: 0,
+            timer: null
+        }
+
         //console.log(os.homedir());
         const settings_path = os.homedir() + "\\AppData\\Local\\fog_settings.json"
 
@@ -112,12 +118,63 @@ class App extends Component {
 
     handleSequenceOffClicked(e) {
         console.log('handleSequenceOffClicked');
-
+        if (this.sequence.timer) {
+            clearTimeout(this.sequence.timer);
+            this.sequence.timer = null;
+            this.sequence.N = 0;
+            this.sequence.level = 0;
+            this.requestArduinoApi('fog',  this.sequence.level)
+            console.log('RECREATE TIMER');
+            this.timer = setInterval(() => {
+                    this.requestArduinoApi();
+                },
+                30 * 1000);
+        }
     }
 
     handleSequenceOnClicked(e) {
         console.log('handleSequenceOnClicked');
+        if (this.sequence.N === 0) {
+            clearInterval(this.timer);
+            this.sequence.N = this.state.settings.N;
+            this.sequence.level = 0;
+            this.processSequence();
+        }
+    }
 
+    processSequence() {
+        console.log('processSequence', this.sequence.N, this.sequence.level);
+        if (this.sequence.level === 1) {
+            this.sequence.N = this.sequence.N - 1;
+        }
+        if (this.sequence.N === 0) {
+            this.sequence.level = 0;
+            console.log('FOG', this.sequence.level);
+            this.requestArduinoApi('fog',  this.sequence.level)
+            console.log('STOP');
+            this.timer = setInterval(() => {
+                    this.requestArduinoApi();
+                },
+                30 * 1000);
+        } else {
+            if (this.sequence.level === 0) {
+                this.sequence.level = 1;
+                console.log('FOG', this.sequence.level);
+                this.requestArduinoApi('fog',  this.sequence.level)
+                this.sequence.timer = setTimeout(() => {
+                        this.processSequence();
+                    },
+                    this.state.settings.T2 * 1000);
+            } else {
+                this.sequence.level = 0;
+                console.log('FOG', this.sequence.level);
+                this.requestArduinoApi('fog',  this.sequence.level)
+                this.sequence.timer = setTimeout(() => {
+                        this.processSequence();
+                    },
+                    this.state.settings.T3 * 1000);
+            }
+        }
     }
 
     requestArduinoApi(service="", value="") {
@@ -157,7 +214,6 @@ class App extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         if (nextState.settings.uilang !== this.props.i18n.language) {
-            console.log('CHANGE -----------', nextState.settings.uilang)
             this.props.i18n.changeLanguage(nextState.settings.uilang);
             return false;
         }
