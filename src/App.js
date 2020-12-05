@@ -116,7 +116,7 @@ class App extends Component {
     }
 
     handleSequenceOnClicked(e) {
-        console.log('handlePowerOnClicked');
+        console.log('handleSequenceOnClicked');
 
     }
 
