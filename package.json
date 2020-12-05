@@ -4,10 +4,10 @@
   "private": true,
   "window": {
     "icon": "fog.png",
-    "min-width": 360,
-    "min-height": 440,
-    "width": 520,
-    "height": 480
+    "min-width": 560,
+    "min-height": 480,
+    "width": 760,
+    "height": 460
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",

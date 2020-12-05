@@ -29,13 +29,13 @@
   "Save": "Enregistrer",
   "Settings": "Configuration",
   "Start Arduino fog sequence": "Programmée sur l'Arduino",
-  "Start arduino fog program": "Séquence de brume sur Arduino",
-  "Start fog program": "Séquence de brume",
+  "Start arduino fog program": "Séquence de brumisation sur Arduino",
+  "Start fog program": "Séquence de brumisation",
   "Stop": "Stop",
-  "Stop Arduino fog sequence": "Arrêt de la séquence de brume sur Arduino",
+  "Stop Arduino fog sequence": "Arrêt de la séquence de brumisation sur Arduino",
   "T1 (minutes)": "T1 (minutes)",
   "T2 (seconds)": "T2 (secondes)",
   "T3 (seconds)": "T3 (secondes)",
-  "The fog sequence is controlled by the Arduino onboard sketch": "La séquence de brume est contrôlée par le programme embarqué Arduino",
+  "The fog sequence is controlled by the Arduino onboard sketch": "La séquence de brumisation est contrôlée par le programme embarqué sur Arduino",
   "Warning": "Avertissement"
 }
