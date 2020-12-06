@@ -218,14 +218,15 @@ class App extends Component {
                 console.log(response);
                 const prevState = this.state
                 if (response.status === 200) {
-                    let result = response.data.match(/(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)/);
-                    if (result && result.length === 7) {
+                    let result = response.data.match(/(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)/);
+                    if (result && result.length === 8) {
                         prevState.settings.T1 = parseInt(result[1]);
                         prevState.settings.N = parseInt(result[2]);
                         prevState.settings.T2 = parseInt(result[3]);
                         prevState.settings.T3 = parseInt(result[4]);
                         prevState.machine.power = parseInt(result[5]);
                         prevState.machine.fog = parseInt(result[6]);
+                        prevState.machine.sequence = parseInt(result[7]);
                         prevState.status = "";
                     } else {
                         prevState.status = t("Error: unexpected answer @") + this.state.settings.arduinoIpAddress;

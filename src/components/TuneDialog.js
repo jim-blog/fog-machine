@@ -86,8 +86,8 @@ class TuneDialog extends Component {
                 console.log(response);
                 const prevState = this.state
                 if (response.status === 200) {
-                    let result = response.data.match(/(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)/);
-                    if (result && result.length === 7) {
+                    let result = response.data.match(/(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)/);
+                    if (result && result.length === 8) {
                         prevState.settings.t1 = parseInt(result[1]);
                         prevState.settings.n = parseInt(result[2]);
                         prevState.settings.t2 = parseInt(result[3]);
