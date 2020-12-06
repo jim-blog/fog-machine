@@ -88,10 +88,12 @@ class TuneDialog extends Component {
                 if (response.status === 200) {
                     let result = response.data.match(/(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)\|(\d+)/);
                     if (result && result.length === 9) {
-                        prevState.settings.t1 = parseInt(result[1]);
-                        prevState.settings.n = parseInt(result[2]);
-                        prevState.settings.t2 = parseInt(result[3]);
-                        prevState.settings.t3 = parseInt(result[4]);
+                        if ( parseInt(result[8]) === 1) { // SD present
+                            prevState.settings.t1 = parseInt(result[1]);
+                            prevState.settings.n = parseInt(result[2]);
+                            prevState.settings.t2 = parseInt(result[3]);
+                            prevState.settings.t3 = parseInt(result[4]);
+                        }
                         prevState.status = "";
                     } else {
                         prevState.status = t("Error: unexpected answer @") + this.state.settings.arduinoIpAddress;
