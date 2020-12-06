@@ -106,13 +106,17 @@ class App extends Component {
             this.alertRef.current.handleClickOpen(t("Not allowed"), t("Stop PC sequence to enable Arduino sequence."));
             return;
         }
+        if (this.state.machine.sequence === 1) {
+            this.alertRef.current.handleClickOpen(t("Not allowed"), t("Arduino sequence already running."));
+            return;
+        }
         this.requestArduinoApi('sequence', 1)
         console.log('RECREATE TIMER (FAST)');
         clearInterval(this.timer);
         this.timer = setInterval(() => {
                 this.requestArduinoApi();
             },
-            650);
+            850);
     }
 
     handleFogOffClicked(e) {
@@ -177,7 +181,7 @@ class App extends Component {
                     this.processSequence();
                 }
             },
-            this.state.settings.T1 * 60 * 1000);
+            this.state.settings.T1 * 1000);
         if (this.sequence.N === 0) {
             clearInterval(this.timer);
             this.sequence.N = this.state.settings.N;

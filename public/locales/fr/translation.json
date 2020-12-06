@@ -6,6 +6,7 @@
   "Arduino SD card": "Arduino SD card",
   "Arduino SD card Led": "Voyant Arduino SD card",
   "Arduino sequence": "Brumisation embarquée",
+  "Arduino sequence already running.": "Brumisation Arduino en cours.",
   "Arduino sequence Led": "Voyant brumisation embarquée",
   "Cancel": "Annuler",
   "Dismiss": "OK",
