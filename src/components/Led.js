@@ -39,7 +39,7 @@ class Led extends Component {
                             <img
                                 className={className}
                                 alt={alt}
-                                src={state === 1 ? LedYellow : LedGrey}
+                                src={state >= 1 ? LedYellow : LedGrey}
                             />
                         </Grid>
                     </Grid>
