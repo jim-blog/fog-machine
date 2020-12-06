@@ -6,8 +6,8 @@
     "icon": "fog.png",
     "min-width": 560,
     "min-height": 480,
-    "width": 760,
-    "height": 460
+    "width": 660,
+    "height": 490
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",

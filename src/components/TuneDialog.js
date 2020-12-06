@@ -37,7 +37,7 @@ class TuneDialog extends Component {
 
     handleClickOpen() {
         const win = nw.Window.get();
-        win.resizeTo(760, 720);
+        win.resizeTo(660, 720);
         //console.log('OPEN SETTINGS', this.props.settings.uilang)
         this.UiLangRef = this.props.settings.uilang;
         this.NameRef = this.props.settings.name;

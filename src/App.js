@@ -431,6 +431,16 @@ class App extends Component {
                                 }}
                             />
                         </Grid>
+                        <Grid item xs={2}>
+                            <p></p>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Led className="Led"
+                                 alt={t('Arduino SD card Led')}
+                                 label={t('Arduino SD card')}
+                                 state={this.state.sd}
+                            />
+                        </Grid>
                         <Grid item xs={6}>
                             <AlertDialog
                                 t = {t}
