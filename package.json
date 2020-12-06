@@ -6,7 +6,7 @@
     "icon": "fog.png",
     "min-width": 560,
     "min-height": 480,
-    "width": 660,
+    "width": 680,
     "height": 490
   },
   "dependencies": {
