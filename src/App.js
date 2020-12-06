@@ -91,6 +91,12 @@ class App extends Component {
     handleArduinoSequenceOffClicked(e) {
         console.log('handleArduinoSequenceOffClicked');
         this.requestArduinoApi('sequence', 0)
+        console.log('RECREATE TIMER');
+        clearInterval(this.timer);
+        this.timer = setInterval(() => {
+                this.requestArduinoApi();
+            },
+            30 * 1000);
     }
 
     handleArduinoSequenceOnClicked(e) {
@@ -101,6 +107,12 @@ class App extends Component {
             return;
         }
         this.requestArduinoApi('sequence', 1)
+        console.log('RECREATE TIMER (FAST)');
+        clearInterval(this.timer);
+        this.timer = setInterval(() => {
+                this.requestArduinoApi();
+            },
+            650);
     }
 
     handleFogOffClicked(e) {
