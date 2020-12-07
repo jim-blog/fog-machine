@@ -33,7 +33,6 @@ struct state_t state = {
 
 Sequence sequence(PIN_FOG);
 
-File settingsFile;
 String recv_str;
 byte mac[6];
 
@@ -73,41 +72,26 @@ void setup()
   } else {
     Serial.println(F("initialization failed!"));
   }
-  /*
-    // open the file. note that only one file can be open at a time,
-    // so you have to close this one before opening another.
-    myFile = SD.open("test.txt", FILE_WRITE);
 
-    // if the file opened okay, write to it:
-    if (myFile) {
-      Serial.print("Writing to test.txt...");
-      myFile.println("testing 1, 2, 3.");
-      // close the file:
-      myFile.close();
-      Serial.println("done.");
-    } else {
-      // if the file didn't open, print an error:
-      Serial.println("error opening test.txt");
-    }
-
-    // re-open the file for reading:
-    myFile = SD.open("test.txt");
-    if (myFile) {
-      Serial.println("test.txt:");
-
-      // read from the file until there's nothing else in it:
-      while (myFile.available()) {
-        Serial.write(myFile.read());
+  if (state.sd == 1) {
+    if (SD.exists(F("SETTINGS.CFG"))) {
+      File fp = SD.open(F("SETTINGS.CFG"));
+      if (fp) {
+        String str;
+        while (fp.available()) {
+          str += fp.read();
+        }
+        fp.close();
+        setSettings(str);
+        Serial.print(F("Settings loaded from SD card: "));
+        Serial.println(str);
+      } else {
+        Serial.println(F("Failed to open SETTINGS.CFG for reading."));
       }
-      // close the file:
-      myFile.close();
     } else {
-      // if the file didn't open, print an error:
-      Serial.println("error opening test.txt");
+      Serial.println(F("Configuration file SETTINGS.CFG not found."));
     }
-
-
-  */
+  }
 
   server.begin();           // start to listen for clients
 
@@ -177,6 +161,14 @@ void loop()
             int data_end = recv_str.indexOf(' ', 14);
             if (data_end > 14) {
               setSettings(recv_str.substring(14, data_end));
+              File fp = SD.open(F("SETTINGS.CFG"), FILE_WRITE);
+              if (fp) {
+                fp.println(recv_str.substring(14, data_end));
+                fp.close();
+                Serial.print(F("Settings saved to SD card."));
+              } else {
+                Serial.println(F("Failed to open SETTINGS.CFG for writing."));
+              }
             }
             Serial.println(F("200 - OK"));
             writeResponse(client, 200, &String(stateResponse()));
