@@ -24,8 +24,6 @@ struct state_t {
   struct machine_t machine;
 };
 
-enum SequenceState { IDLE = 0, T1, T2, T3 };
-
 void safe_mac(byte *mac, uint8_t s = 1) {
   /*
       Locally Administered Address Ranges that can be used on your network
