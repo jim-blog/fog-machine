@@ -79,7 +79,8 @@ void setup()
       if (fp) {
         String str;
         while (fp.available()) {
-          str += fp.read();
+          char c = fp.read();
+          str += c;
         }
         fp.close();
         setSettings(str);
@@ -161,11 +162,15 @@ void loop()
             int data_end = recv_str.indexOf(' ', 14);
             if (data_end > 14) {
               setSettings(recv_str.substring(14, data_end));
+              if (SD.exists(F("SETTINGS.CFG"))) {
+                SD.remove(F("SETTINGS.CFG"));
+              }
               File fp = SD.open(F("SETTINGS.CFG"), FILE_WRITE);
               if (fp) {
                 fp.println(recv_str.substring(14, data_end));
                 fp.close();
-                Serial.print(F("Settings saved to SD card."));
+                Serial.print(F("Settings saved to SD card:"));
+                Serial.println(recv_str.substring(14, data_end));
               } else {
                 Serial.println(F("Failed to open SETTINGS.CFG for writing."));
               }
