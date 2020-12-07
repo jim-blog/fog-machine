@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "window": {
-
+    "show": false,
     "icon": "fog.png",
     "min_width": 680,
     "min_height": 490,

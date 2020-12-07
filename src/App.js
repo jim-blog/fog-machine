@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Led from 'components/Led';
 import 'App.css';
 import axios from 'axios';
+import { initWindowState, dumpWindowState, restoreWindowState, saveWindowState } from 'lib/winstate.js'
 
 const fs = require('fs-extra')
 const os = require('os');
@@ -70,10 +71,12 @@ class App extends Component {
         if (!this.state.settings.arduinoIpAddress) {
             this.state.status = t("Arduino IP address is missing");
         }
+
+        //nw.Window.get().showDevTools(); // for debug
+        initWindowState();
     }
 
     componentDidMount() {
-        //nw.Window.get().showDevTools(); // for debug
         if (this.state.settings.arduinoIpAddress) {
             this.requestArduinoApi();
             console.log('CREATE TIMER');
