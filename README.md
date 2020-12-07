@@ -1,5 +1,5 @@
-# Fog Controller
-*NW.js React app to control Fog Machine prop.*
+# Fog Machine
+*Control a fog machine with Arduino UNO and NW.js React app.*
 
 > Early draft development stage.
 
