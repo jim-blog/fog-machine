@@ -73,7 +73,7 @@ class App extends Component {
     }
 
     componentDidMount() {
-        nw.Window.get().showDevTools();
+        //nw.Window.get().showDevTools(); // for debug
         if (this.state.settings.arduinoIpAddress) {
             this.requestArduinoApi();
             console.log('CREATE TIMER');
