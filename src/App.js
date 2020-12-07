@@ -228,8 +228,8 @@ class App extends Component {
     requestArduinoApi(service="", value="") {
         const { t } = this.props;
         console.log('requestArduinoApi', service, value);
-        axios.get(String(value).length > 0 ? `//${this.state.settings.arduinoIpAddress}/${service}/${value}`
-            : `//${this.state.settings.arduinoIpAddress}/${service}`,
+        axios.get(String(value).length > 0 ? `http://${this.state.settings.arduinoIpAddress}/${service}/${value}`
+            : `http://${this.state.settings.arduinoIpAddress}/${service}`,
             {timeout: 3000})
             .then((response) => {
                 console.log(response);
