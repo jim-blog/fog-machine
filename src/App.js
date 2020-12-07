@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid';
 import Led from 'components/Led';
 import 'App.css';
 import axios from 'axios';
-import { initWindowState, dumpWindowState, restoreWindowState, saveWindowState } from 'lib/winstate.js'
+import { initWindowState } from 'lib/winstate.js'
 
 const fs = require('fs-extra')
 const os = require('os');
