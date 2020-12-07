@@ -6,9 +6,9 @@
     "show": false,
     "icon": "fog.png",
     "min_width": 680,
-    "min_height": 490,
+    "min_height": 485,
     "width": 680,
-    "height": 490
+    "height": 485
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
