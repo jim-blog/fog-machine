@@ -6,13 +6,3 @@
 * <a href="README-material-ui.md" target="_blank">add Mateial-UI to NW.js React app</a>
 * <a href="README-react-i18next.md" target="_blank">localize app with React i18n</a>
 * <a href="README-winstate.md" target="_blank">preserve NW.js window state between sessions</a>
-
-
-
-## Author
-
-**Jean-Michel _(Jim)_ FAURE** (December 8th, 2020)
-* company: FAURE SYSTEMS®
-* mail: *dev at faure dot systems*
-* github: <a href="https://github.com/fauresystems" target="_blank">fauresystems</a>
-* web: <a href="https://faure.systems/" target="_blank">Faure●Systems</a>
