@@ -106,11 +106,7 @@ Fog program sequence:
 | GET /sequence/1          | 200 - OK             | Start fog program sequence             |
 | GET /sequence/0          | 200 - OK             | Stop fog program sequence              |
 | GET /settings/37,3,5,15  | 200 - OK             | Set T1,N,T2,T3                         |
-| GET /                    | `37|3|5|15|0|0|0|0`  | `T1|N|T2|T3|power|fog|sequence|sd card`|
-
-
-
-
+| GET / | 37&#124;3&#124;5&#124;15&#124;0&#124;0&#124;0&#124;0 | T1&#124;N&#124;T2&#124;T3&#124;power&#124;fog&#124;sequence&#124;sd card |
 
 
 ## What next ?
