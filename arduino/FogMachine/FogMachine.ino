@@ -54,7 +54,7 @@ void setup()
 
   // Check for Ethernet hardware present
   if (Ethernet.hardwareStatus() == EthernetNoHardware) {
-    Serial.println("Ethernet shield was not found.  Sorry, can't run without hardware. :(");
+    Serial.println(F("Ethernet shield was not found.  Sorry, can't run without hardware. :("));
     while (true) {
       delay(1); // do nothing, no point running without Ethernet hardware
     }
