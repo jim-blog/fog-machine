@@ -107,6 +107,7 @@ Fog program sequence:
 * <a href="https://github.com/xcape-io/ArduinoProps" target="_blank">ArduinoProps library</a> and its examples
 * <a href="https://github.com/xcape-io/PyPropControl" target="_blank">PyQt5 Prop Control library</a>: PyQt5 library to create control panels for escape room props
 
+> With <a href="https://xcape.io/public/documentation/en/room/Configureautomaticevents.html" target="_blank">xcape.io Room automation</a>, the fog machine can be fully controlled, including 3-5 minutes preheating.  
 
 ## What next ?
 You'll find here all the source code to hack and build your own Fog Controller app or Arduino FogMachine sketch:
