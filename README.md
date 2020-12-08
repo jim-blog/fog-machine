@@ -68,7 +68,26 @@ Run `fog-controller.exe`
 
 ![App](docs/images/app.png)
 
-The <a href="https://github.com/jim-blog/fog-machine/tree/master/src" target="_blank">Fog Controller app source code</a> is available from this GitHub repository.
+<a href="https://github.com/jim-blog/fog-machine/tree/master/src" target="_blank">Fog Controller app source code</a> is available from this GitHub repository, as a Javascript coder, feel free to fork and hack your own controller app.
+
+
+## Set the Fog program sequence
+Fog program sequence: 
+* spit fog for *T2* seconds, pause *T3* seconds, do that *N* times then pause *T1* minutes and starts again for ever.
+
+![](docs/images/app-settings.png)
+
+
+## What next ?
+You'll find here all the source code to hack and build your own Fog Controller app or Arduino FogMachine sketch:
+* app is available in English and French, you can easily add your own language
+* you can replace the Arduino Ethernet Shield with Arduino Nano, Arduino MKR Wifi 1010 or any other Arduino compatible board
+* all the source code is available in this repository with some documentation:
+    - <a href="https://github.com/jim-blog/fog-machine/tree/master/docs/developer/electronics" target="_blank">Electronics with `fog_machine.fz`z Fritzing project</a>
+    - <a href="https://github.com/jim-blog/fog-machine/tree/master/docs/developer/arduino" target="_blank">Arduino developer notes</a>
+    - <a href="https://github.com/jim-blog/fog-machine/tree/master/docs/developer/app" target="_blank">NW.js React developer notes</a>
+        
+
 
 
 
