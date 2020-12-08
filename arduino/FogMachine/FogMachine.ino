@@ -11,7 +11,7 @@
 */
 
 #include <SPI.h>
-#include "SD.h"
+#include <SD.h>
 #include <Ethernet.h>
 #include <IPAddress.h>
 #include "lib.h"
@@ -53,7 +53,8 @@ void setup()
   }
 
   // Check for Ethernet hardware present
-  if (Ethernet.hardwareStatus() == EthernetNoHardware) {
+  if (
+    Ethernet.hardwareStatus() == EthernetNoHardware) {
     Serial.println(F("Ethernet shield was not found.  Sorry, can't run without hardware. :("));
     while (true) {
       delay(1); // do nothing, no point running without Ethernet hardware
