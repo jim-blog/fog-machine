@@ -49,8 +49,8 @@ String ip = "192.168.1.201"; //<<< ENTER YOUR IP ADDRESS HERE
 Upload **FogMachine** sketch to the Arduino
 
 ```dos
-Sketch uses 26748 bytes (82%) of program storage space. Maximum is 32256 bytes.
-Global variables use 1197 bytes (58%) of dynamic memory, leaving 851 bytes for local variables. Maximum is 2048 bytes.
+Sketch uses 27460 bytes (85%) of program storage space. Maximum is 32256 bytes.
+Global variables use 1127 bytes (55%) of dynamic memory, leaving 921 bytes for local variables. Maximum is 2048 bytes.
 
 ```
 
