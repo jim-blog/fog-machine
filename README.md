@@ -58,10 +58,10 @@ Global variables use 1197 bytes (58%) of dynamic memory, leaving 851 bytes for l
 ## Install Fog Controller app for Windows
 
 Download and unzip the app archive:
-* <a href="https://github.com/jim-blog/fog-machine/raw/master/bin/win64/fog-controller-win64.zip">fog-controller-win64.zip</a>
+* <a href="https://github.com/jim-blog/fog-machine/raw/master/bin/win64/fog-controller-win64.zip">fog-controller-win64.zip</a> (92.1 MB)
 
 Alternatively, download the `.7z` app archive and unzip with <a href="https://www.7-zip.org/" target="_blank">7-Zip</a>:
-* <a href="https://github.com/jim-blog/fog-machine/raw/master/bin/win64/fog-controller-win64.7z">fog-controller-win64.7z</a>
+* <a href="https://github.com/jim-blog/fog-machine/raw/master/bin/win64/fog-controller-win64.7z">fog-controller-win64.7z</a> (64.6 MB)
 
 Run `fog-controller.exe`
 > If necessary, pass protection *Windows Smartscreen* that prevents the execution of the downloaded file.
