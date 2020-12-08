@@ -78,6 +78,41 @@ Fog program sequence:
 ![](docs/images/app-settings.png)
 
 
+## Fog prop in Escape Room
+
+### Houdini MC users
+
+<a href="https://houdinimc.com/" target="_blank">Houdini MC</a> control props with HTTP GET/POST requests (see <a href="https://houdinimc.com/2018/04/13/interact-with-a-controller/" target="_blank">Interacting with a Controller (e.g. Arduino/Raspberry Pi) tutorial</a>).
+
+Arduino FogMachien API:
+
+GET /fog/1
+
+GET /fog/0
+
+GET /power/1
+
+GET /power/0
+
+GET /sequence/1
+
+GET /sequence/0
+
+GET /settings/
+
+GET /
+
+
+
+### Escape Romm Master users
+
+
+
+### xcape.io Room users
+
+
+
+
 ## What next ?
 You'll find here all the source code to hack and build your own Fog Controller app or Arduino FogMachine sketch:
 * app is available in English and French, you can easily add your own language
@@ -87,9 +122,6 @@ You'll find here all the source code to hack and build your own Fog Controller a
     - <a href="https://github.com/jim-blog/fog-machine/tree/master/docs/developer/arduino" target="_blank">Arduino developer notes</a>
     - <a href="https://github.com/jim-blog/fog-machine/tree/master/docs/developer/app" target="_blank">NW.js React developer notes</a>
         
-
-
-
 
 ## Author
 
