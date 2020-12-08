@@ -114,7 +114,7 @@ You'll find here all the source code to hack and build your own Fog Controller a
 * app is available in English and French, you can easily add your own language
 * you can replace the Arduino Ethernet Shield with Arduino Nano, Arduino MKR Wifi 1010 or any other Arduino compatible board
 * all the source code is available in this repository with some documentation:
-    - <a href="https://github.com/jim-blog/fog-machine/tree/master/docs/developer/electronics" target="_blank">Electronics with `fog_machine.fz`z Fritzing project</a>
+    - <a href="https://github.com/jim-blog/fog-machine/tree/master/docs/developer/electronics" target="_blank">Electronics with `fog_machine.fzz` Fritzing project</a>
     - <a href="https://github.com/jim-blog/fog-machine/tree/master/docs/developer/arduino" target="_blank">Arduino developer notes</a>
     - <a href="https://github.com/jim-blog/fog-machine/tree/master/docs/developer/app" target="_blank">NW.js React developer notes</a>
         
