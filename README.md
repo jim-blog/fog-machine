@@ -38,7 +38,7 @@ The SD card is necessary to store the fog sequence but optional if you want to c
 
 ## Edit and upload the Arduino sketch
 
-Install lastest <a href="https://www.arduino.cc/en/software" target="_blank">Arduino IDE</a>.
+Install lastest <a href="https://www.arduino.cc/en/software" target="_blank">Arduino IDE</a> and download the <a href="https://github.com/jim-blog/fog-machine/tree/master/arduino" target="_blank">FogMachine sketch</a> from this GitHub repository.
 
 Open **FogMachine** sketch in Arduino IDE and set the Arduino IP address:
 
