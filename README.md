@@ -80,22 +80,11 @@ Fog program sequence:
 
 ## Fog prop in Escape Room
 
-### Houdini MC users
+### <a href="https://houdinimc.com/" target="_blank">Houdini MC</a> users
 
 <a href="https://houdinimc.com/" target="_blank">Houdini MC</a> control props with HTTP GET/POST requests (see <a href="https://houdinimc.com/2018/04/13/interact-with-a-controller/" target="_blank">Interacting with a Controller (e.g. Arduino/Raspberry Pi) tutorial</a>).
 
-
-
-### Escape Room Master users
-
-
-
-### xcape.io Room users
-
-
-
-
-### Arduino FogMachine API
+#### Arduino FogMachine API:
 
 | API                      | RESPONSE             | DESCRIPTION                            |
 |--------------------------|----------------------|----------------------------------------|
@@ -107,6 +96,16 @@ Fog program sequence:
 | GET /sequence/0          | 200 - OK             | Stop fog program sequence              |
 | GET /settings/37,3,5,15  | 200 - OK             | Set T1,N,T2,T3                         |
 | GET / | 37&#124;3&#124;5&#124;15&#124;0&#124;0&#124;0&#124;0 | T1&#124;N&#124;T2&#124;T3&#124;power&#124;fog&#124;sequence&#124;sd card |
+
+
+### <a href="https://xcape.io/room/" target="_blank">xcape.io Room</a> users
+
+<a href="https://xcape.io/room/" target="_blank">xcape.io Room</a> software use MQTT and offers automation to control finely Fog Machines.
+
+<a href="https://xcape.io/room/" target="_blank">xcape.io</a> provides source code for many props at GitHub:
+* <a href="https://github.com/xcape-io/RelayProp" target="_blank">Relay Prop</a>: a no-code prop and control panel to command relays with Arduino Mega 2560
+* <a href="https://github.com/xcape-io/ArduinoProps" target="_blank">ArduinoProps library</a> and its examples
+* <a href="https://github.com/xcape-io/PyPropControl" target="_blank">PyQt5 Prop Control library</a>: PyQt5 library to create control panels for escape room props
 
 
 ## What next ?
