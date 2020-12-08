@@ -84,31 +84,31 @@ Fog program sequence:
 
 <a href="https://houdinimc.com/" target="_blank">Houdini MC</a> control props with HTTP GET/POST requests (see <a href="https://houdinimc.com/2018/04/13/interact-with-a-controller/" target="_blank">Interacting with a Controller (e.g. Arduino/Raspberry Pi) tutorial</a>).
 
-Arduino FogMachien API:
-
-GET /fog/1
-
-GET /fog/0
-
-GET /power/1
-
-GET /power/0
-
-GET /sequence/1
-
-GET /sequence/0
-
-GET /settings/
-
-GET /
 
 
-
-### Escape Romm Master users
+### Escape Room Master users
 
 
 
 ### xcape.io Room users
+
+
+
+
+### Arduino FogMachine API
+
+| API             | RESPONSE             | DESCRIPTION                            |
+|-----------------|----------------------|----------------------------------------|
+| GET /fog/1      | 200 - OK             | OK                                     |
+| GET /fog/0      | 200 - OK             | OK                                     |
+| GET /power/1    | 200 - OK             | OK                                     |
+| GET /power/0    | 200 - OK             | OK                                     |
+| GET /sequence/1 | 200 - OK             | OK                                     |
+| GET /sequence/0 | 200 - OK             | OK                                     |
+| GET /settings/  | 200 - OK             | OK                                     |
+| GET /           | `37|3|5|15|0|0|0|0`  | `T1|N|T2|T3|power|fog|sequence|sd card`|
+
+
 
 
 
