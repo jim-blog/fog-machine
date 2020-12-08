@@ -1,4 +1,4 @@
-# Developer notes
+# Arduino developer notes
 *Tips and what I learnt during this project.*
 
 
@@ -40,7 +40,7 @@ Limit HTTP respone code to:
 
 #### We dont need *SdFat* library, *SD* library is good enough
 
-![Install SdFat library](docs/sdfat_library.png)
+![Install SdFat library](images/sdfat_library.png)
 
 If you're new with Arduino IDE:
 

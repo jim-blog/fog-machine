@@ -1,4 +1,4 @@
-# Preserve window state between sessions
+# Preserve NW.js window state between sessions
 
 First you need to hide the window until your app loads previous state, so be sure you got in package.json this line:
 
