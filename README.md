@@ -97,16 +97,16 @@ Fog program sequence:
 
 ### Arduino FogMachine API
 
-| API             | RESPONSE             | DESCRIPTION                            |
-|-----------------|----------------------|----------------------------------------|
-| GET /fog/1      | 200 - OK             | OK                                     |
-| GET /fog/0      | 200 - OK             | OK                                     |
-| GET /power/1    | 200 - OK             | OK                                     |
-| GET /power/0    | 200 - OK             | OK                                     |
-| GET /sequence/1 | 200 - OK             | OK                                     |
-| GET /sequence/0 | 200 - OK             | OK                                     |
-| GET /settings/  | 200 - OK             | OK                                     |
-| GET /           | `37|3|5|15|0|0|0|0`  | `T1|N|T2|T3|power|fog|sequence|sd card`|
+| API                      | RESPONSE             | DESCRIPTION                            |
+|--------------------------|----------------------|----------------------------------------|
+| GET /fog/1               | 200 - OK             | Activate fog relay                     |
+| GET /fog/0               | 200 - OK             | Dectivate fog relay                    |
+| GET /power/1             | 200 - OK             | Activate power relay                   |
+| GET /power/0             | 200 - OK             | Deactivate power relay                 |
+| GET /sequence/1          | 200 - OK             | Start fog program sequence             |
+| GET /sequence/0          | 200 - OK             | Stop fog program sequence              |
+| GET /settings/37,3,5,15  | 200 - OK             | Set T1,N,T2,T3                         |
+| GET /                    | `37|3|5|15|0|0|0|0`  | `T1|N|T2|T3|power|fog|sequence|sd card`|
 
 
 
