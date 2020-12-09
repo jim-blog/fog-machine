@@ -89,7 +89,7 @@ Fog program sequence:
 | API                      | RESPONSE             | DESCRIPTION                            |
 |--------------------------|----------------------|----------------------------------------|
 | GET /fog/1               | 200 - OK             | Activate fog relay                     |
-| GET /fog/0               | 200 - OK             | Dectivate fog relay                    |
+| GET /fog/0               | 200 - OK             | Deactivate fog relay                   |
 | GET /power/1             | 200 - OK             | Activate power relay                   |
 | GET /power/0             | 200 - OK             | Deactivate power relay                 |
 | GET /sequence/1          | 200 - OK             | Start fog program sequence             |
