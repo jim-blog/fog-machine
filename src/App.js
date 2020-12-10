@@ -34,13 +34,14 @@ class App extends Component {
                 uilang: this.props.i18n.language
             },
             machine: {
-                power: 1,
+                power: 0,
                 fog: 0,
                 sequence: 0
             },
             sd: 0,
             sequence: 0,
-            status: ''
+            status: '',
+            uilang: 'en'
         };
 
         console.log('SETTINGS', this.state);
@@ -269,7 +270,8 @@ class App extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (nextState.settings.uilang !== this.props.i18n.language) {
+        console.log('shouldComponentUpdate', this.props.i18n.language, nextState.settings.uilang)
+        if (nextState.settings.uilang && this.props.i18n.language !== nextState.settings.uilang) {
             this.props.i18n.changeLanguage(nextState.settings.uilang);
             return false;
         }

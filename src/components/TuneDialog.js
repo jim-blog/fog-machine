@@ -32,13 +32,11 @@ class TuneDialog extends Component {
         this.NRef = this.props.settings.N;
         this.T2Ref = this.props.settings.T2;
         this.T3Ref = this.props.settings.T3;
-        this.initialUilang = this.props.settings.uilang;
     }
 
     handleClickOpen() {
         const win = nw.Window.get();
         win.resizeTo(680, 720);
-        //console.log('OPEN SETTINGS', this.props.settings.uilang)
         this.UiLangRef = this.props.settings.uilang;
         this.NameRef = this.props.settings.name;
         this.ArduinoIpAddressRef = this.props.settings.arduinoIpAddress;
@@ -51,7 +49,6 @@ class TuneDialog extends Component {
 
     handleClose() {
         const prevState = this.state;
-        prevState.settings.uilang = this.initialUilang;
         prevState.open = false;
         this.setState(prevState);
     }
